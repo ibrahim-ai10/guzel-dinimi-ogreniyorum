@@ -11,6 +11,8 @@
   - `t` – Titel
   - `p` – Lernkarten als `[emoji, überschrift, text]`
   - `q` – Quizfragen als `[frage, [optionen…], indexDerRichtigenAntwort]` (Optionen werden zur Laufzeit gemischt)
+  - Standard: 6 Lernkarten und 6 Fragen mit je 3 Antwortoptionen pro Ünite
+- **Sterne:** alle Fragen richtig = 3, mindestens zwei Drittel richtig = 2, sonst 1 (Funktion `finish`).
 - **Fortschritt:** `localStorage`-Key `"gdo-v1"`, Format `{name: string, stars: {"<bereichId>-<üniteIndex>": 1..3}}`. Bei inkompatiblen Formatänderungen den Key hochzählen.
 
 ## Konventionen

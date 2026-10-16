@@ -5,8 +5,8 @@ Eine Lern-Web-App für Kinder (auf Türkisch), aufgebaut nach dem Diyanet-Buch *
 ## Inhalt
 
 - **4 Bereiche:** İnanç · İbadet · Siyer · Ahlâk
-- **29 Üniten**, jede mit kurzen Lernkarten und einem Quiz mit 3 Fragen
-- **Sterne-Fortschritt** (1–3 Sterne pro Ünite), lokal im Browser per `localStorage` gespeichert – keine Anmeldung, kein Server
+- **29 Üniten**, jede mit 6 Lernkarten und einem Quiz mit 6 Fragen (insgesamt 174 Lernkarten und 174 Fragen)
+- **Sterne-Fortschritt** (1–3 Sterne pro Ünite: alle richtig = 3, mindestens zwei Drittel = 2, sonst 1), lokal im Browser per `localStorage` gespeichert – keine Anmeldung, kein Server
 
 ## Nutzung
 

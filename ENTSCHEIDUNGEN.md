@@ -14,3 +14,6 @@ Die App folgt der Themenreihenfolge von „Etkinliklerle Dinimi Öğreniyorum“
 
 ## 5. Fortschritt nur lokal (`localStorage`, Key `gdo-v1`)
 Keine Konten, kein Backend, keine Datenerhebung bei Kindern. Nachteil: Fortschritt ist an Gerät/Browser gebunden.
+
+## 6. Inhaltlicher Ausbau: 6 Lernkarten + 6 Fragen pro Ünite
+Statt 3 Karten und 3 Fragen hat jede Ünite jetzt 6 Lernkarten und 6 Quizfragen (174 + 174 insgesamt). Die Sternewertung richtet sich nach dem Anteil richtiger Antworten (alle = 3, ≥ ⅔ = 2, sonst 1). So bleibt sie unabhängig von der Fragenzahl, und gespeicherte Fortschritte unter `gdo-v1` bleiben gültig.
