@@ -17,3 +17,11 @@ Keine Konten, kein Backend, keine Datenerhebung bei Kindern. Nachteil: Fortschri
 
 ## 6. Inhaltlicher Ausbau: 6 Lernkarten + 6 Fragen pro Ünite
 Statt 3 Karten und 3 Fragen hat jede Ünite jetzt 6 Lernkarten und 6 Quizfragen (174 + 174 insgesamt). Die Sternewertung richtet sich nach dem Anteil richtiger Antworten (alle = 3, ≥ ⅔ = 2, sonst 1). So bleibt sie unabhängig von der Fragenzahl, und gespeicherte Fortschritte unter `gdo-v1` bleiben gültig.
+
+## 7. Hauptzielgruppe: Lehrkräfte im Unterricht (Sınıf Modu)
+Die App wird vor allem per Beamer oder Smartboard im Unterricht eingesetzt. Deshalb gibt es einen Klassenmodus statt einer eigenen Lehrer-App:
+- **Automatik:** Ab 1000 px Breite ist er automatisch aktiv und lässt sich umschalten (gespeichert als `cls` in `gdo-v1`). Auf dem Handy bleibt alles wie bisher.
+- **Steuerung:** Die Lehrkraft steuert per Tastatur oder Presenter (→/←/Bild↑↓, A/B/C, F, Esc) und muss dafür nicht zum Laptop gehen.
+- **Gesprächsfrage:** Pro Ünite gibt es eine Frage (`d`) für die Klasse, damit nicht nur abgefragt, sondern auch gesprochen wird.
+- **Team-Punkte:** werden bewusst von Hand geführt (+/−) und nur im Speicher gehalten. So bleibt die Lehrkraft flexibel (Melden, Gruppenarbeit), und es werden keine Schülerdaten gespeichert.
+- **Layout:** Es passt ab 1280×720 ohne Scrollen. In Lektionen wird die untere Navigation ausgeblendet.

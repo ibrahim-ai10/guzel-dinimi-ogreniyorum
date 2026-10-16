@@ -116,6 +116,61 @@ input[type=text]{width:100%;font:inherit;font-size:19px;padding:10px 14px;border
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .pop{animation:pop .35s ease}
 @keyframes pop{0%{transform:scale(.96);opacity:.4}100%{transform:none;opacity:1}}
+.key{display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--blue-l);color:var(--blue-d);margin-right:12px;font-weight:800;flex:0 0 auto}
+.opt{display:flex;align-items:center}
+.card.talk{background:var(--green-l);border-color:var(--green)}
+.top .fs{margin-left:auto}
+.hint{text-align:center;color:var(--muted);font-size:15px;margin:14px 0 0}
+.teams{display:flex;gap:12px;align-items:center;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
+.team{display:flex;align-items:center;gap:10px;padding:6px 10px 6px 16px;border-radius:999px;background:var(--card);border:3px solid var(--blue);font-weight:800}
+.team.t1{border-color:var(--green)}
+.team button{width:40px;height:40px;border-radius:50%;background:var(--blue-l);font-size:26px;font-weight:800;line-height:1}
+.team b{min-width:2ch;text-align:center;font-size:30px}
+.treset{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);color:var(--muted);font-size:20px}
+/* Sınıf Modu: projeksiyon / akıllı tahta */
+:root.cls body{font-size:20px}
+:root.cls .app,:root.cls nav .in{max-width:1180px}
+:root.cls main{padding:0 32px}
+:root.cls .arch{max-width:560px}
+:root.cls .arch h1{font-size:56px}
+:root.cls .arch p{font-size:38px}
+:root.cls .greet h2{font-size:46px}
+:root.cls .greet p{font-size:24px}
+:root.cls .grid{grid-template-columns:repeat(4,1fr);gap:18px}
+:root.cls .cat .lbl{font-size:28px}
+:root.cls .cat small{font-size:16px}
+:root.cls .journey h3{font-size:26px}
+:root.cls .cta{font-size:26px;padding:16px}
+:root.cls .top{padding:16px 32px}
+:root.cls .top h2{font-size:34px}
+:root.cls .top .back{width:48px;height:48px}
+:root.cls .ulist{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}
+:root.cls .unit{padding:16px 18px}
+:root.cls .unit .t{font-size:22px}
+:root.cls .unit .num{flex-basis:48px;height:48px;font-size:22px}
+:root.cls .stars{font-size:19px}
+:root.cls .intro{font-size:22px}
+:root.cls .lesson{padding:24px 32px}
+:root.cls .steps i{height:10px}
+:root.cls .card{padding:40px 52px;min-height:min(48vh,520px);display:flex;flex-direction:column;justify-content:center}
+:root.cls .card .ic{font-size:clamp(56px,7vw,104px)}
+:root.cls .card h3{font-size:clamp(32px,3.6vw,56px);margin:12px 0 14px}
+:root.cls .card p{font-size:clamp(22px,min(2.7vw,4.8vh),42px);line-height:1.4}
+:root.cls .card.q{padding:22px 40px}
+:root.cls .card.q .ic{display:none}
+:root.cls .card.q h3{margin:0;font-size:clamp(28px,min(3.4vw,6vh),54px)}
+:root.cls .app:has(.lesson,.done){padding-bottom:16px}
+:root.cls .app:has(.lesson,.done)~nav{display:none}
+:root.cls .opt{font-size:clamp(22px,min(2.5vw,4.4vh),38px);padding:12px 22px;margin-top:12px}
+:root.cls .fb{font-size:30px;min-height:44px}
+:root.cls .hint{font-size:18px}
+:root.cls .done .big{font-size:96px}
+:root.cls .done h2{font-size:50px}
+:root.cls .done p{font-size:28px}
+:root.cls .done{max-width:720px;margin:0 auto}
+:root.cls nav button{font-size:17px}
+@media (max-height:800px){:root.cls .hint{display:none}:root.cls .lesson{padding-top:16px}:root.cls .teams{margin-bottom:10px}:root.cls .fb{min-height:36px;margin-top:8px}:root.cls .lesson .cta{margin:10px 0 0;padding:12px}:root.cls .app:has(.lesson){padding-bottom:0}}
+@media (max-width:800px){:root.cls .grid{grid-template-columns:1fr 1fr}:root.cls .ulist{display:block}:root.cls main,:root.cls .lesson{padding-left:16px;padding-right:16px}:root.cls .card{padding:28px 24px}}
 </style>
 </head>
 <body>
@@ -126,7 +181,7 @@ input[type=text]{width:100%;font:inherit;font-size:19px;padding:10px 14px;border
 /* ---------- İçerik: kitabın 4 bölümü ve 29 ünitesi (özet + sorular) ---------- */
 const CATS = [
  {id:"inanc", name:"İnanç", sub:"İman esasları", c:"b", units:[
-  {t:"Kelime-i Tevhid ve Kelime-i Şehâdet", p:[
+  {t:"Kelime-i Tevhid ve Kelime-i Şehâdet", d:"Ezanı en son nerede duydunuz? Ezanı dinlerken Kelime-i Şehâdet’in hangi sözlerini fark ettiniz?", p:[
    ["☝️","Kelime-i Tevhid","“Lâ ilâhe illallah Muhammedün resûlullah.” Anlamı: Allah’tan başka ilah yoktur, Hz. Muhammed O’nun elçisidir."],
    ["💚","Tevhid ne demek?","Tevhid “birlemek” demektir. Allah’ın bir olduğuna, eşi, benzeri ve ortağı olmadığına inanmaktır."],
    ["🤲","Kelime-i Şehâdet","“Eşhedü en lâ ilâhe illallah ve eşhedü enne Muhammeden abdühû ve resûlüh.” Allah’ın bir olduğuna ve Hz. Muhammed’in O’nun kulu ve elçisi olduğuna şahitlik ederim."],
@@ -139,7 +194,7 @@ const CATS = [
      ["Kelime-i Şehâdet’te Hz. Muhammed nasıl anılır?",["Allah’ın kulu ve elçisi","Bir melek","Bir kral"],0],
      ["Kelime-i şehâdet getirmek İslam’ın kaçıncı şartıdır?",["İlk şartı","Son şartı","Üçüncü şartı"],0],
      ["Bu güzel sözleri en sık nerede duyarız?",["Ezanda","Masallarda","Reklamlarda"],0]]},
-  {t:"İslam’ın ve İmanın Esasları", p:[
+  {t:"İslam’ın ve İmanın Esasları", d:"İslam’ın şartlarından hangilerini ailenizde ya da çevrenizde görüyorsunuz? Birer örnek verelim.", p:[
    ["🕌","Dinim İslam","Biz Müslümanız. Dinimiz İslam’dır. İslam kelimesi barış, esenlik ve Allah’a teslim olmak anlamlarını taşır."],
    ["💡","İman nedir?","İman, Allah’ın ve Peygamberimizin bildirdiklerine kalpten inanmak ve bunu diliyle söylemektir."],
    ["6️⃣","İmanın 6 esası","Allah’a, meleklere, kitaplara, peygamberlere, âhiret gününe, kader ve kazaya inanmak."],
@@ -152,7 +207,7 @@ const CATS = [
      ["Hangisi İslam’ın şartlarından biridir?",["Oruç tutmak","Meleklere inanmak","Kadere inanmak"],0],
      ["İmanın esaslarını özetleyen söze ne denir?",["Âmentü","Ezan","Kamet"],0],
      ["İnanan kişiye ne denir?",["Mümin","Muhacir","Müezzin"],0]]},
-  {t:"Allah’a İnanıyorum", p:[
+  {t:"Allah’a İnanıyorum", d:"Çevrenize bakın: Allah’ın yarattığı hangi güzellikleri görüyorsunuz? Her biriniz bir tane söylesin.", p:[
    ["🌍","Her şeyi Allah yarattı","Gökyüzü, yeryüzü, denizler, çiçekler, hayvanlar ve biz… Gördüğümüz ve bildiğimiz her şeyin yaratıcısı Allah’tır."],
    ["🔍","Evrendeki düzen","Güneş her sabah doğar, mevsimler sırayla gelir. Bu kusursuz düzen, her şeyi yaratan ve yöneten Allah’ın varlığını gösterir."],
    ["💚","Allah birdir","O’nun eşi, benzeri ve ortağı yoktur. Doğmamış ve doğurmamıştır. İhlâs suresi bunu bize anlatır."],
@@ -165,7 +220,7 @@ const CATS = [
      ["Hangisi doğrudur?",["Allah hiçbir şeye muhtaç değildir","Allah’ın bir benzeri vardır","Allah sadece gündüz görür"],0],
      ["Allah’ın bir olduğunu anlatan kısa sure hangisidir?",["İhlâs suresi","Fil suresi","Kevser suresi"],0],
      ["Evrendeki düzen bize neyi gösterir?",["Her şeyi yaratan Allah’ın varlığını","Her şeyin kendiliğinden olduğunu","Hiçbir şeyi"],0]]},
-  {t:"Meleklere İnanıyorum", p:[
+  {t:"Meleklere İnanıyorum", d:"Kirâmen Kâtibîn melekleri bugün sizin için hangi güzel davranışı yazsın isterdiniz?", p:[
    ["🌟","Melekler kimdir?","Melekler nurdan yaratılmış varlıklardır. Gözle görülmezler ve Allah’ın emirlerini yerine getirirler."],
    ["🍃","Meleklerin özellikleri","Yemez, içmez ve uyumazlar. Erkeklik ve dişilikleri yoktur. Allah’a asla karşı gelmezler."],
    ["📜","Cebrâil ve Mikâil","Cebrâil peygamberlere vahiy getirir. Mikâil yağmur, rüzgâr gibi tabiat olaylarıyla görevlidir."],
@@ -178,7 +233,7 @@ const CATS = [
      ["Sûr’a üfleyecek melek hangisidir?",["İsrâfil","Mikâil","Cebrâil"],0],
      ["Yağmur ve rüzgâr gibi tabiat olaylarıyla görevli melek hangisidir?",["Mikâil","Azrâil","İsrâfil"],0],
      ["Hangisi meleklerin bir özelliğidir?",["Yemez, içmez, uyumazlar","Bizim gibi yemek yerler","Allah’a karşı gelirler"],0]]},
-  {t:"Kitaplara İnanıyorum", p:[
+  {t:"Kitaplara İnanıyorum", d:"Kur’an’dan ezbere bildiğiniz bir sure var mı? Hangisi? İsteyen arkadaşımız okusun.", p:[
    ["📩","Vahiy","Allah’ın emir ve yasaklarını melek aracılığıyla peygamberlerine bildirmesine vahiy denir."],
    ["📚","Dört büyük kitap","Tevrat Hz. Mûsâ’ya, Zebûr Hz. Dâvûd’a, İncil Hz. Îsâ’ya, Kur’an-ı Kerim Hz. Muhammed’e indirildi."],
    ["📜","Suhuf","Bazı peygamberlere küçük kitapçıklar verildi; bunlara suhuf denir. Hz. Âdem ve Hz. İbrâhim bunlardandır."],
@@ -191,7 +246,7 @@ const CATS = [
      ["Kur’an-ı Kerim’in ilk suresi hangisidir?",["Fâtiha","Nâs","İhlâs"],0],
      ["Kur’an hangi gece indirilmeye başlandı?",["Kadir Gecesi","Mevlid Kandili","Arefe gecesi"],0],
      ["Bazı peygamberlere verilen küçük kitapçıklara ne denir?",["Suhuf","Hutbe","Kamet"],0]]},
-  {t:"Peygamberlere İnanıyorum", p:[
+  {t:"Peygamberlere İnanıyorum", d:"Hangi peygamberin hayatını daha çok merak ediyorsunuz? Neden?", p:[
    ["🧭","Neden peygamber?","Allah, insanlara doğru yolu göstermek ve onlara örnek olmak için aralarından peygamberler seçti."],
    ["🔢","İlk ve son","İlk peygamber Hz. Âdem, son peygamber Hz. Muhammed’dir. Kur’an’da 25 peygamberin adı geçer."],
    ["⭐","Doğru, güvenilir, akıllı","Peygamberler doğru sözlüdür (sıdk), güvenilirdir (emanet) ve akıllıdır (fetânet)."],
@@ -204,7 +259,7 @@ const CATS = [
      ["Kur’an’da kaç peygamberin adı geçer?",["25","114","6"],0],
      ["Peygamberlerin günah işlememesine ne denir?",["İsmet","Sıdk","Tebliğ"],0],
      ["Allah’ın emriyle gemi yapan peygamber kimdir?",["Hz. Nûh","Hz. Yûsuf","Hz. Dâvûd"],0]]},
-  {t:"Âhiret Hayatına İnanıyorum", p:[
+  {t:"Âhiret Hayatına İnanıyorum", d:"Bugün yapabileceğimiz hangi iyilikler âhirette bizi sevindirir? Birlikte bir liste yapalım.", p:[
    ["🌱","Ölüm son değildir","Canlılar doğar, yaşar ve ölür. Ama ölümden sonra yeni ve sonsuz bir hayat başlar. Buna âhiret denir."],
    ["🌌","Kıyamet","Bir gün Allah’ın dilemesiyle dünya hayatı sona erecek. Buna kıyamet denir. Ne zaman kopacağını yalnızca Allah bilir."],
    ["🌅","Yeniden diriliş","İsrâfil’in Sûr’a üflemesiyle bütün insanlar yeniden diriltilecek ve bir araya toplanacaktır."],
@@ -217,7 +272,7 @@ const CATS = [
      ["Kıyametin ne zaman kopacağını kim bilir?",["Yalnızca Allah","Herkes","Sadece büyükler"],0],
      ["İyilik ve kötülüklerin tartılmasına ne denir?",["Mîzan","Minber","Mihrap"],0],
      ["İnanıp iyilik yapanların sonsuz yurdu neresidir?",["Cennet","Cehennem","Dünya"],0]]},
-  {t:"Kader ve Kazaya İnanıyorum", p:[
+  {t:"Kader ve Kazaya İnanıyorum", d:"Bir sınav için hem çalışıp hem dua etmek neden önemlidir? Tevekkülü kendi hayatınızdan bir örnekle anlatın.", p:[
    ["📐","Kader","Allah her şeyi bir ölçü ve düzen içinde yaratmıştır. Allah’ın her şeyi önceden bilip belirlemesine kader denir."],
    ["✅","Kaza","Kaderde olanın, zamanı gelince gerçekleşmesine kaza denir."],
    ["🌻","Her şeyde ölçü var","Arı peteğini, örümcek ağını hep aynı düzenle yapar. Su belli bir sıcaklıkta kaynar. Her şey Allah’ın koyduğu ölçüye göredir."],
@@ -232,7 +287,7 @@ const CATS = [
      ["Hangisi doğru bir davranıştır?",["Ders çalışıp sonra dua etmek","Hiç çalışmadan başarı beklemek","“Nasılsa olur” deyip uyumak"],0]]}
  ]},
  {id:"ibadet", name:"İbadet", sub:"Namaz, oruç, dua", c:"g", units:[
-  {t:"İbadetin Anlamı ve Çeşitleri", p:[
+  {t:"İbadetin Anlamı ve Çeşitleri", d:"Bugün Allah rızası için yapabileceğiniz küçük bir iyilik ne olabilir?", p:[
    ["💚","İbadet nedir?","Allah’ın emirlerini yerine getirmek ve O’nun sevgisini kazandıran her güzel söz ve davranış ibadettir."],
    ["🙏","Neden ibadet ederiz?","Bizi yaratan ve bize sayısız nimet veren Allah’a şükretmek ve O’na yakın olmak için ibadet ederiz."],
    ["🧍","Bedenle yapılanlar","Namaz ve oruç gibi bedenimizle yaptığımız ibadetler."],
@@ -245,7 +300,7 @@ const CATS = [
      ["Namaz nasıl bir ibadettir?",["Bedenle yapılan","Malla yapılan","Hem beden hem malla yapılan"],0],
      ["Neden ibadet ederiz?",["Allah’a şükretmek ve O’na yakın olmak için","Övülmek için","Gösteriş yapmak için"],0],
      ["Allah rızası için yapılan bir iyilik nedir?",["İbadet olabilir","Hiçbir değeri yoktur","Sadece büyüklere aittir"],0]]},
-  {t:"Cami ve Ezan", p:[
+  {t:"Cami ve Ezan", d:"Camiye gittiğinizde neler dikkatinizi çekti? Mihrabı, minberi ya da minareyi gördünüz mü?", p:[
    ["🕌","Cami","Cami, Müslümanların bir araya gelip ibadet ettiği yerdir. Küçük olanlarına mescit denir."],
    ["🧭","Caminin içi","Mihrap: imamın namaz kıldırdığı yer. Minber: hutbe okunan yer. Kürsü: vaaz verilen yer."],
    ["🗼","Caminin dışı","Kubbe: yarım küre biçimli tavan. Minare: ezan okunan yüksek kule. Şadırvan: abdest alınan çeşmeler."],
@@ -258,7 +313,7 @@ const CATS = [
      ["Ezanı okuyan kişiye ne denir?",["Müezzin","Vaiz","Hacı"],0],
      ["Küçük camilere ne denir?",["Mescit","Minare","Kubbe"],0],
      ["Camiye nasıl gireriz?",["Sağ ayakla, temiz ve sessizce","Koşarak ve bağırarak","Ayakkabılarımızla"],0]]},
-  {t:"Namazın Farzları", p:[
+  {t:"Namazın Farzları", d:"Abdest alırken hangi sırayı takip ederiz? Birlikte hareketlerle gösterelim.", p:[
    ["🧼","Önce temizlik","Namazdan önce abdest alırız. Gerektiğinde gusül (boy abdesti) alınır. Su bulunmazsa teyemmüm yapılır."],
    ["💧","Abdestin farzları","Yüzü yıkamak, kolları dirseklerle birlikte yıkamak, başın dörtte birini meshetmek, ayakları topuklarla birlikte yıkamak."],
    ["🚿","Namazın dışındaki farzlar","Abdestli olmak, beden-elbise-yerin temiz olması, örtülmesi gereken yerleri örtmek, kıbleye yönelmek, vaktin girmesi ve niyet."],
@@ -271,7 +326,7 @@ const CATS = [
      ["Namazda hangi yöne döneriz?",["Kâbe’ye (kıbleye)","Güneşe","Kapıya"],0],
      ["Rükû hangi farzlardandır?",["Namazın içindeki","Namazın dışındaki","Abdestin"],0],
      ["Su bulunmadığında ne yapılır?",["Teyemmüm","Gusül","İftar"],0]]},
-  {t:"Namaz Kılıyorum", p:[
+  {t:"Namaz Kılıyorum", d:"Beş vakit namaz günün hangi saatlerine denk geliyor? Kendi günümüzle karşılaştıralım.", p:[
    ["🌅","Beş vakit","Sabah, öğle, ikindi, akşam ve yatsı. Namaz bizi günde beş defa Rabbimizle buluşturur."],
    ["🔢","Farz rekâtlar","Sabah 2, öğle 4, ikindi 4, akşam 3, yatsı 4 rekât farzdır."],
    ["🕰️","Sünnetler","Sabahın farzından önce 2, öğlenin farzından önce 4 ve sonra 2, ikindinin önce 4, akşamın sonra 2, yatsının önce 4 ve sonra 2 rekât sünneti vardır."],
@@ -284,7 +339,7 @@ const CATS = [
      ["Vitir namazı kaç rekâttır?",["3","2","4"],0],
      ["Cuma namazı hangi vakitte kılınır?",["Öğle vaktinde","Sabah vaktinde","Yatsı vaktinde"],0],
      ["Namazın her rekâtında okunan sure hangisidir?",["Fâtiha suresi","Fil suresi","Yâsîn suresi"],0]]},
-  {t:"Oruç Tutuyorum", p:[
+  {t:"Oruç Tutuyorum", d:"Hiç oruç tuttunuz mu ya da sahura kalktınız mı? Neler hissettiniz?", p:[
    ["🌙","Oruç nedir?","İbadet niyetiyle imsak vaktinden iftar vaktine kadar yemekten ve içmekten uzak durmaktır."],
    ["🍽️","Sahur ve iftar","İmsaktan önce yenen yemeğe sahur, akşam ezanıyla orucu açmaya iftar denir."],
    ["📅","Ramazan","Ramazan ayında oruç tutmak farzdır. Ramazan, Kur’an’ın indirilmeye başlandığı mübarek aydır."],
@@ -297,7 +352,7 @@ const CATS = [
      ["Oruç bize ne öğretir?",["Sabretmeyi","Kızmayı","İsraf etmeyi"],0],
      ["Hasta olan kişi ne yapabilir?",["İyileşince orucunu kaza eder","Hiçbir zaman oruç tutamaz","Hasta da olsa tutmak zorundadır"],0],
      ["Ramazan Bayramı’nda ne yaparız?",["Büyükleri ziyaret eder, bayramlaşırız","Kimseyle konuşmayız","Evden hiç çıkmayız"],0]]},
-  {t:"Zekâtı Öğreniyorum", p:[
+  {t:"Zekâtı Öğreniyorum", d:"Bir şeyinizi paylaştığınızda kendinizi nasıl hissediyorsunuz? Bir örnek anlatın.", p:[
    ["🤝","Paylaşmanın adı","Zekât, zengin Müslümanın malının bir kısmını ihtiyaç sahiplerine vermesidir."],
    ["📏","Kime farz?","Temel ihtiyaçlarından fazla, belirli bir miktar (nisap) malı olan ve bu malın üzerinden bir yıl geçen Müslümana farzdır."],
    ["➗","Ne kadar?","Zekâtı verilecek malın kırkta biri verilir."],
@@ -310,7 +365,7 @@ const CATS = [
      ["Zekât için gereken en az mal miktarına ne denir?",["Nisap","Fitre","Kıble"],0],
      ["Peygamberimize göre kardeşimize gülümsemek nedir?",["Sadaka","Günah","Gereksiz"],0],
      ["Kişi zekâtını kime veremez?",["Kendi anne babasına","Fakirlere","Borçlulara"],0]]},
-  {t:"Haccı Öğreniyorum", p:[
+  {t:"Haccı Öğreniyorum", d:"Hacca ya da umreye giden bir yakınınız var mı? Size neler anlattı?", p:[
    ["🕋","Kutsal yolculuk","Hac, Kâbe’yi ve çevresindeki kutsal yerleri belirli günlerde ziyaret etmektir."],
    ["🧳","Kime farz?","Sağlığı ve maddi gücü yeten Müslümana ömründe bir kez farzdır."],
    ["🤍","İhram","Hacılar ihrama girer. Erkekler dikişsiz iki beyaz örtü giyer. Zengin fakir herkes eşittir."],
@@ -323,7 +378,7 @@ const CATS = [
      ["Kâbe’nin etrafında yedi kez dönmeye ne denir?",["Tavaf","Sa‘y","Vakfe"],0],
      ["Haccın en önemli farzı hangisidir?",["Arafat’ta vakfe","Sahur yemek","Minareye çıkmak"],0],
      ["Hacıların giydiği beyaz örtülere ne denir?",["İhram","Cübbe","Sarık"],0]]},
-  {t:"Dua Ediyorum", p:[
+  {t:"Dua Ediyorum", d:"Bugün kimin için dua etmek istersiniz? Hep birlikte kısa bir dua edelim.", p:[
    ["🤲","Dua nedir?","Dua, her şeye gücü yeten Allah’tan istemek, O’na yalvarmak ve şükretmektir."],
    ["🌼","Neden dua ederiz?","Her şey Allah’a muhtaçtır; Allah ise hiçbir şeye muhtaç değildir. Bu yüzden O’ndan yardım isteriz."],
    ["🕰️","Ne zaman dua ederiz?","Her zaman ve her dilde dua edebiliriz: namazdan sonra, sabah ve akşam, üzüldüğümüzde ve sevindiğimizde."],
@@ -338,7 +393,7 @@ const CATS = [
      ["Ne zaman dua edebiliriz?",["Her zaman","Sadece bayramda","Sadece gece"],0]]}
  ]},
  {id:"siyer", name:"Siyer", sub:"Peygamberimizin hayatı", c:"b", units:[
-  {t:"Peygamberimizin Çocukluğu ve Gençliği", p:[
+  {t:"Peygamberimizin Çocukluğu ve Gençliği", d:"Peygamberimize neden “el-Emîn” deniyordu? Güvenilir bir insan olmak için neler yapmalıyız?", p:[
    ["🏜️","O dönemde Mekke","İnsanların çoğu putlara tapıyor, güçlüler zayıflara haksızlık ediyordu. Bu döneme cahiliye dönemi denir."],
    ["🌸","Doğumu","Peygamberimiz 571 yılında Mekke’de doğdu. Babası Abdullah o doğmadan vefat etmişti; annesi Hz. Âmine’dir."],
    ["🏕️","Süt annesi","Peygamberimiz küçükken çölde, süt annesi Halime’nin yanında büyüdü."],
@@ -351,7 +406,7 @@ const CATS = [
      ["Peygamberimizin süt annesi kimdir?",["Hz. Halime","Hz. Âmine","Hz. Fâtıma"],0],
      ["Dedesi vefat edince Peygamberimize kim baktı?",["Amcası Ebû Tâlib","Hz. Ebûbekir","Hz. Ömer"],0],
      ["Putlara tapılan döneme ne denir?",["Cahiliye dönemi","Hicret","Bayram"],0]]},
-  {t:"İlk Vahyin Gelişi", p:[
+  {t:"İlk Vahyin Gelişi", d:"Peygamberimiz zor günlerde nasıl sabretti? Siz bir şey zor geldiğinde ne yaparsınız?", p:[
    ["⛰️","Hira Mağarası","Peygamberimiz düşünmek ve ibadet etmek için Nur Dağı’ndaki Hira Mağarası’na çekilirdi."],
    ["📖","“Oku!”","610 yılında, 40 yaşındayken Cebrâil geldi ve ilk ayetleri getirdi. İlk emir “Oku!” idi."],
    ["💚","Hz. Hatice’nin desteği","Peygamberimiz heyecanla eve döndü. Eşi Hz. Hatice onu teselli etti ve ona ilk inanan kişi oldu."],
@@ -364,7 +419,7 @@ const CATS = [
      ["Çocuklardan ilk Müslüman olan kimdir?",["Hz. Ali","Hz. Hasan","Hz. Hüseyin"],0],
      ["Gizli davet yaklaşık ne kadar sürdü?",["Üç yıl","On yıl","Bir gün"],0],
      ["İlk vahyi getiren melek hangisidir?",["Cebrâil","Mikâil","Azrâil"],0]]},
-  {t:"Peygamberimizin Hicreti", p:[
+  {t:"Peygamberimizin Hicreti", d:"Evinizden ayrılıp başka bir şehre taşınmak zorunda kalsaydınız neler hissederdiniz?", p:[
    ["😟","Neden göç?","Mekkelilerin baskısı arttı. Medine’den gelen Müslümanlar Akabe’de Peygamberimize yardım sözü verdi."],
    ["🐪","Medine’ye göç","Peygamberimiz 622 yılında Mekke’den Medine’ye göç etti. Buna hicret denir."],
    ["🕸️","Sevr Mağarası","Yolculukta Hz. Ebûbekir ile birlikte Sevr Mağarası’nda üç gün saklandılar."],
@@ -377,7 +432,7 @@ const CATS = [
      ["Hicret hangi yılda oldu?",["622","571","610"],0],
      ["Medine’nin eski adı nedir?",["Yesrib","Taif","Mekke"],0],
      ["Hicrî takvim hangi olayla başlar?",["Hicret","Peygamberimizin doğumu","İlk vahiy"],0]]},
-  {t:"Peygamberimizin Medine Hayatı", p:[
+  {t:"Peygamberimizin Medine Hayatı", d:"Ensar, muhacirlerle her şeyini paylaştı. Sınıfımıza yeni bir arkadaş gelse ona nasıl yardım ederiz?", p:[
    ["🤗","Kardeşlik","Mekke’den göç edenlere muhacir, onlara kucak açan Medinelilere ensar denir. Peygamberimiz onları kardeş yaptı."],
    ["🕌","Mescid-i Nebevî","Medine’de bir mescit yapıldı. Peygamberimiz de yapımında taş taşıyarak çalıştı. Burası hem ibadet hem eğitim yeriydi."],
    ["📚","Suffe","Mescidin yanındaki Suffe’de Müslümanlar ilim öğrenirdi. Burası ilk İslam okulu sayılır."],
@@ -390,7 +445,7 @@ const CATS = [
      ["Mescid-i Nebevî’nin yapımında Peygamberimiz ne yaptı?",["Kendisi de çalıştı","Hiç katılmadı","Sadece izledi"],0],
      ["Mekke’nin fethinde Peygamberimiz ne yaptı?",["Mekkelileri affetti","Herkesi cezalandırdı","Şehri yaktı"],0],
      ["Peygamberimiz kaç yaşında vefat etti?",["63","40","25"],0]]},
-  {t:"Peygamberimizin Örnek Kişiliği", p:[
+  {t:"Peygamberimizin Örnek Kişiliği", d:"Peygamberimizin hangi davranışını bu hafta örnek almak istersiniz?", p:[
    ["🌟","En güzel örnek","Kur’an’da Peygamberimizin bizim için en güzel örnek olduğu bildirilir. Her sözüyle ve davranışıyla bize yol gösterir."],
    ["🧒","Çocukları severdi","Çocuklara selam verir, onlarla şakalaşırdı. Torunları Hz. Hasan ve Hz. Hüseyin’i çok sever, onlarla oyun oynardı."],
    ["🐈","Hayvanlara merhamet","Hayvanlara eziyet edilmesini yasakladı. Susuz bir köpeğe su veren kişinin Allah’ın sevgisini kazandığını anlattı."],
@@ -405,7 +460,7 @@ const CATS = [
      ["Peygamberimiz kendisine kötülük yapanlara nasıl davranırdı?",["Affederdi","İntikam alırdı","Onlara beddua ederdi"],0]]}
  ]},
  {id:"ahlak", name:"Ahlâk", sub:"Güzel davranışlar", c:"g", units:[
-  {t:"Ahlâk Nedir?", p:[
+  {t:"Ahlâk Nedir?", d:"Güzel ahlâklı bir insan nasıl davranır? Her biriniz bir özellik söylesin.", p:[
    ["🌈","Güzel davranışlar","Ahlâk, insanın davranışlarına yön veren özelliklerdir. Paylaşmak, doğru olmak ve temizlik güzel ahlâktandır."],
    ["💛","Peygamberimizin görevi","Peygamberimiz, güzel ahlâkı tamamlamak için gönderildiğini söylemiştir."],
    ["😊","Güzel ahlâk","Doğruluk, merhamet, sabır, cömertlik ve alçakgönüllülük (tevazu) güzel ahlâkın örnekleridir."],
@@ -418,7 +473,7 @@ const CATS = [
      ["Hangisi kötü ahlâktır?",["Dedikodu yapmak","Yardım etmek","Doğru söylemek"],0],
      ["Âhirette mîzanda en ağır gelecek şey nedir?",["Güzel ahlâk","Para","Güzel kıyafetler"],0],
      ["Kendini başkalarından üstün görmeye ne denir?",["Kibir","Tevazu","Sabır"],0]]},
-  {t:"Sevgi ve Saygı", p:[
+  {t:"Sevgi ve Saygı", d:"Bugün kime selam verdiniz? Selam vermek neden sevgiyi artırır?", p:[
    ["☀️","Allah’ın sevgisi","Gökyüzü, yağmur, çiçekler… Bunların hepsi Allah’ın bize olan sevgisinin işaretleridir."],
    ["💚","Peygamber sevgisi","Peygamberimizi severiz. Onun güzel davranışlarını örnek alır, adı anıldığında salavat getiririz."],
    ["👨‍👩‍👧","Aileye ve büyüklere","Anne babamızı sever, büyüklerimize saygı gösterir, küçüklerimize şefkat ederiz."],
@@ -431,7 +486,7 @@ const CATS = [
      ["Selama nasıl karşılık verilir?",["Ve aleyküm selâm","Güle güle","Afiyet olsun"],0],
      ["Peygamberimizi sevdiğimizi nasıl gösteririz?",["Güzel davranışlarını örnek alarak","Onu hiç anmayarak","Sadece adını bilerek"],0],
      ["Komşularımıza nasıl davranırız?",["Saygı ve iyilikle","Gürültü yaparak","Selam vermeden"],0]]},
-  {t:"Sorumluluk ve Aile İçindeki Görevlerim", p:[
+  {t:"Sorumluluk ve Aile İçindeki Görevlerim", d:"Evde hangi görevleri yapıyorsunuz? Bu hafta hangi yeni görevi üstlenebilirsiniz?", p:[
    ["🐝","Her varlığın görevi","Allah hiçbir şeyi boşuna yaratmadı. Arı bal yapar, güneş ısıtır; bizim de görevlerimiz var."],
    ["🙋","Kendime karşı","Sağlığımı korurum: dengeli beslenir, yeterince uyur, temiz olurum."],
    ["🏠","Evde yardım","Odamı toplamak, sofraya yardım etmek ve eşyalarıma sahip çıkmak benim görevim."],
@@ -444,7 +499,7 @@ const CATS = [
      ["Kendimize karşı sorumluluğumuz hangisidir?",["Sağlığımızı korumak","Geç saate kadar uyumamak","Sadece abur cubur yemek"],0],
      ["Parktaki ortak eşyaları nasıl kullanırız?",["Özenle","Kırarak","Üzerine yazı yazarak"],0],
      ["Allah’a karşı görevimiz nedir?",["Şükretmek ve emirlerine uymak","Hiçbir şey","Sadece istemek"],0]]},
-  {t:"Temiz ve Erdemli Olmak", p:[
+  {t:"Temiz ve Erdemli Olmak", d:"Sınıfımızı daha temiz tutmak için neler yapabiliriz? Birlikte bir liste yapalım.", p:[
    ["🧼","Allah temizdir","Peygamberimiz, Allah’ın temiz olduğunu ve temiz olanları sevdiğini bildirmiştir."],
    ["🪥","Beden temizliği","Yemekten önce ve sonra ellerimizi yıkar, dişlerimizi fırçalarız. Peygamberimiz dişlerini misvakla temizlerdi."],
    ["👕","Elbise ve eşya","Temiz ve düzgün giyiniriz. Eşyalarımızı düzenli tutarız."],
@@ -457,7 +512,7 @@ const CATS = [
      ["Kalbimizi neyden temiz tutarız?",["Kin ve kıskançlıktan","Sevgiden","Merhametten"],0],
      ["Yemekten önce ve sonra ne yaparız?",["Ellerimizi yıkarız","Hiçbir şey yapmayız","Ellerimizi elbisemize sileriz"],0],
      ["Peygamberimiz dişlerini neyle temizlerdi?",["Misvakla","Tespihle","Kalemle"],0]]},
-  {t:"İyilik Yapmak", p:[
+  {t:"İyilik Yapmak", d:"Bu hafta hangi iyilikleri yaptınız? Kimseye söylemeden yapılan iyilik neden değerlidir?", p:[
    ["🌻","Küçük iyilik yoktur","Bir gülümseme, bir teşekkür, birine yardım etmek… Hepsi değerli birer iyiliktir."],
    ["👵","Büyüklere iyilik","Yaşlılara yardım eder, otobüste yer veririz. Dedemizi ve ninemizi ziyaret ederiz."],
    ["🐱","Canlılara iyilik","Hayvanlara su ve yiyecek vermek, onlara eziyet etmemek de iyiliktir."],
@@ -470,7 +525,7 @@ const CATS = [
      ["Yoldaki taşı kaldırmak nedir?",["Bir iyilik (sadaka)","Gereksiz bir iş","Kötü bir davranış"],0],
      ["Kötülüğe nasıl karşılık veririz?",["İyilikle","Daha büyük kötülükle","Bağırarak"],0],
      ["Otobüste ayakta kalan yaşlı birini görünce ne yaparız?",["Yer veririz","Görmezden geliriz","Gülüp geçeriz"],0]]},
-  {t:"Doğru ve Güvenilir Olmak", p:[
+  {t:"Doğru ve Güvenilir Olmak", d:"Birine verdiğimiz sözü tutmazsak ne olur? Kaybedilen güveni nasıl geri kazanırız?", p:[
    ["✔️","Doğruluk","Her sözümüzde ve işimizde dürüst davranırız; yalan söylemeyiz."],
    ["🌟","En güzel örnek","Peygamberimize el-Emîn denirdi. Ona inanmayanlar bile değerli eşyalarını ona emanet ederdi."],
    ["🔐","Emanet","Bize bırakılan bir şeyi korur, sahibine eksiksiz geri veririz. Ödünç aldığımız kitabı da özenle kullanırız."],
@@ -483,7 +538,7 @@ const CATS = [
      ["Hata yaptığımızda ne yaparız?",["Dürüstçe söyler, özür dileriz","Başkasını suçlarız","Saklarız"],0],
      ["Peygamberimize hangi lakap verilmişti?",["el-Emîn","Sultan","Kaptan"],0],
      ["Yalan söylemek neyi kaybettirir?",["Güveni","Hiçbir şeyi","Sadece zamanı"],0]]},
-  {t:"Paylaşmak ve Yardımlaşmak", p:[
+  {t:"Paylaşmak ve Yardımlaşmak", d:"Sınıfta neleri paylaşabiliriz? Eşya dışında neler paylaşılabilir?", p:[
    ["🍎","Paylaşmak güzeldir","Kendimize ait bir şeyi ihtiyacı olan biriyle paylaşmaktır. Paylaşınca sevinç de çoğalır."],
    ["⏰","Sadece eşya değil","Zamanımızı, bilgimizi ve güler yüzümüzü de paylaşabiliriz."],
    ["🍲","Komşu hakkı","Peygamberimiz, komşusu açken tok yatan kişinin gerçek bir mümin olamayacağını söylemiştir."],
@@ -496,7 +551,7 @@ const CATS = [
      ["Medineli Müslümanlar ne yaptı?",["Her şeylerini muhacirlerle paylaştı","Kapılarını kapattı","Onlardan para istedi"],0],
      ["Herkesin birlikte çalışıp yardımlaşmasına ne denir?",["İmece","İsraf","Kibir"],0],
      ["Komşumuzun yiyeceği yoksa ne yaparız?",["Yemeğimizi paylaşırız","Görmezden geliriz","Kapıyı kapatırız"],0]]},
-  {t:"Çalışmak", p:[
+  {t:"Çalışmak", d:"Büyüyünce ne olmak istiyorsunuz? Bunun için bugünden neler yapabilirsiniz?", p:[
    ["💪","Çalışırsak başarırız","Kur’an’da insan için çalışmasının karşılığı olduğu bildirilir. Allah emek verenleri sever."],
    ["🍞","Helal kazanç","Kendi emeğiyle, helalinden kazanmak çok değerlidir."],
    ["👨‍🔧","Peygamberler de çalıştı","Hz. Dâvûd demircilik yaptı. Peygamberimiz gençliğinde çobanlık ve ticaretle uğraştı."],
@@ -521,6 +576,10 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const uid=(ci,ui)=>CATS[ci].id+"-"+ui;
 const doneCount=()=>Object.keys(S.stars).length;
 const starTotal=()=>Object.values(S.stars).reduce((a,b)=>a+b,0);
+const clsOn=()=>S.cls??matchMedia("(min-width:1000px)").matches;
+function applyCls(){document.documentElement.classList.toggle("cls",clsOn())}
+function toggleCls(){S.cls=!clsOn();save();applyCls()}
+function toggleFS(){const d=document;try{if(d.fullscreenElement)d.exitFullscreen();else{const r=d.documentElement.requestFullscreen&&d.documentElement.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}}catch(e){}}
 function nextUnit(){for(let c=0;c<CATS.length;c++)for(let u=0;u<CATS[c].units.length;u++)if(!S.stars[uid(c,u)])return[c,u];return null}
 
 /* ---------- Çizimler ---------- */
@@ -556,6 +615,8 @@ function home(){
  const d=doneCount(), n=nextUnit();
  app.innerHTML=`
  <header class="hero">${PATTERN}${LANTERN(18,30)}${LANTERN(44,58)}
+  <button class="settings" style="right:66px" aria-label="Sınıf modu" aria-pressed="${clsOn()}" title="Sınıf modu (projeksiyon)" onclick="toggleCls();go('home')">${clsOn()?"🧒":"📽️"}</button>
+  ${clsOn()?`<button class="settings" style="right:118px" aria-label="Tam ekran" title="Tam ekran (F)" onclick="toggleFS()">${fsIco("#2f6fd6")}</button>`:""}
   <button class="settings" aria-label="Profil" onclick="go('prof')"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm9 4l-2.1-.6.4-2.2-2-1.2-1.5 1.6-2-.9L13.4 6h-2.8l-.4 2.7-2 .9-1.5-1.6-2 1.2.4 2.2L3 12l.2 2.3 2.1.6-.4 2.2 2 1.2 1.5-1.6 2 .9.4 2.4h2.8l.4-2.4 2-.9 1.5 1.6 2-1.2-.4-2.2 2.1-.6z" fill="#2f6fd6"/></svg></button>
   <div class="arch">
    <svg class="dome" width="70" height="48" viewBox="0 0 70 48" aria-hidden="true"><path d="M17 46 Q35 4 53 46Z" fill="#2f6fd6"/><rect x="6" y="20" width="6" height="26" fill="#2f6fd6"/><rect x="58" y="20" width="6" height="26" fill="#2f6fd6"/><path d="M38 2a7 7 0 1 0 0 12 5.5 5.5 0 1 1 0-12z" fill="#3aa65a"/></svg>
@@ -577,12 +638,14 @@ function unitList(ci){
 }
 function openCat(ci){
  const c=CATS[ci];
- app.innerHTML=`<div class="top ${c.c}"><button class="back" aria-label="Geri" onclick="go('home')">${backIco()}</button><h2>${c.name}</h2></div><main><p class="intro">${c.units.length} ünite · Her ünitede ${c.units[0].p.length} ders kartı ve ${c.units[0].q.length} soru var.</p>${unitList(ci)}</main>`;
+ app.innerHTML=`<div class="top ${c.c}"><button class="back" aria-label="Geri" onclick="go('home')">${backIco()}</button><h2>${c.name}</h2>${topExtra()}</div><main><p class="intro">${c.units.length} ünite · Her ünitede ${c.units[0].p.length} ders kartı, bir sohbet sorusu ve ${c.units[0].q.length} test sorusu var.</p><div class="ulist">${unitList(ci)}</div></main>`;
  window.scrollTo(0,0);
 }
+const fsIco=c=>`<svg width="20" height="20" viewBox="0 0 16 16"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const topExtra=()=>clsOn()?`<button class="back fs" aria-label="Tam ekran" title="Tam ekran (F)" onclick="toggleFS()">${fsIco("#fff")}</button>`:"";
 function backIco(){return '<svg width="18" height="18" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
 function unitsTab(){
- app.innerHTML=`<div class="top b"><h2>Üniteler</h2></div><main>${CATS.map((c,i)=>`<h3 style="margin:18px 2px 0;color:var(--${c.c==="b"?"blue-d":"green-d"});font-size:22px">${c.name}</h3>${unitList(i)}`).join("")}</main>`;
+ app.innerHTML=`<div class="top b"><h2>Üniteler</h2></div><main>${CATS.map((c,i)=>`<h3 style="margin:18px 2px 0;color:var(--${c.c==="b"?"blue-d":"green-d"});font-size:22px">${c.name}</h3><div class="ulist">${unitList(i)}</div>`).join("")}</main>`;
 }
 function prog(){
  app.innerHTML=`<div class="top b"><h2>İlerlemem</h2></div><main>
@@ -592,7 +655,8 @@ function prog(){
 }
 function prof(){
  app.innerHTML=`<div class="top b"><h2>Profil</h2></div><main>
- <div class="panel"><label class="f" for="nm">Adın</label><input id="nm" type="text" maxlength="20" value="${esc(S.name)}" placeholder="Örneğin Ayşe"><button class="cta blue" onclick="S.name=document.getElementById('nm').value.trim();save();go('home')">Kaydet</button></div>
+ <div class="panel"><label class="f" for="nm">Adın veya sınıfın adı</label><input id="nm" type="text" maxlength="20" value="${esc(S.name)}" placeholder="Örneğin Ayşe veya 3-A"><button class="cta blue" onclick="S.name=document.getElementById('nm').value.trim();save();go('home')">Kaydet</button></div>
+ <div class="panel"><label class="f">📽️ Sınıf Modu ${clsOn()?"(açık)":"(kapalı)"}</label><p style="margin:0 0 4px;color:var(--muted)">Projeksiyon veya akıllı tahta için: büyük yazı, geniş ekran, takım puanları. Klavye veya sunum kumandası ile: → / boşluk ileri, ← geri, A B C cevap, F tam ekran, Esc üniteler.</p><button class="cta blue" onclick="toggleCls();prof()">${clsOn()?"Sınıf modunu kapat":"Sınıf modunu aç"}</button></div>
  <button class="ghost" onclick="if(confirm('Tüm ilerleme silinsin mi?')){S.stars={};save();go('home')}">İlerlemeyi sıfırla</button>
  <p class="note">İçerik, Diyanet İşleri Başkanlığı’nın “Etkinliklerle Dinimi Öğreniyorum” kitabının konu sırasını takip eder; metinler kısa özetlerdir. İlerleme yalnızca bu cihazda saklanır.</p>
  </main>`;
@@ -606,41 +670,72 @@ function openUnit(ci,ui){
  drawLesson();
 }
 function drawLesson(){
- const {ci,u,step}=L, c=CATS[ci], n=u.p.length+u.q.length;
- const head=`<div class="top ${c.c}"><button class="back" aria-label="Geri" onclick="openCat(${ci})">${backIco()}</button><h2>${esc(u.t)}</h2></div>`;
+ const {ci,u,step}=L, c=CATS[ci], P=u.p.length, D=u.d?1:0, n=P+D+u.q.length;
+ L.qOff=P+D;
+ const head=`<div class="top ${c.c}"><button class="back" aria-label="Geri" onclick="openCat(${ci})">${backIco()}</button><h2>${esc(u.t)}</h2>${topExtra()}</div>`;
  const bar=`<div class="steps">${Array.from({length:n},(_,i)=>`<i class="${i<=step?"on":""}"></i>`).join("")}</div>`;
- if(step<u.p.length){
-  const [ic,h,p]=u.p[step];
-  app.innerHTML=`${head}<div class="lesson">${bar}<div class="card pop"><div class="ic">${ic}</div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>
-  <div class="row">${step>0?`<button class="cta blue" onclick="L.step--;drawLesson()">Geri</button>`:""}<button class="cta" onclick="L.step++;drawLesson()">${step===u.p.length-1?"Sorulara geç":"İleri"}</button></div></div>`;
+ const hint=clsOn()?`<p class="hint">→ / boşluk: ileri · ←: geri · A B C: cevap · F: tam ekran · Esc: üniteler</p>`:"";
+ if(step<P+D){
+  const talk=step>=P, [ic,h,p]=talk?["💬","Sınıfça konuşalım",u.d]:u.p[step];
+  app.innerHTML=`${head}<div class="lesson">${bar}<div class="card pop${talk?" talk":""}"><div class="ic">${ic}</div><h3>${esc(h)}</h3><p>${esc(p)}</p></div>
+  <div class="row">${step>0?`<button class="cta blue" id="prv" onclick="L.step--;drawLesson()">Geri</button>`:""}<button class="cta" id="nxt" onclick="L.step++;drawLesson()">${step===P+D-1?"Sorulara geç":"İleri"}</button></div>${hint}</div>`;
  } else if(step<n){
-  const Q=L.qs[step-u.p.length];
-  app.innerHTML=`${head}<div class="lesson">${bar}<div class="card pop" style="min-height:0"><div class="ic">❓</div><h3>${esc(Q.q)}</h3></div>
-  ${Q.opts.map((o,i)=>`<button class="opt" data-i="${i}" onclick="answer(${i})">${esc(o.t)}</button>`).join("")}
-  <div class="fb" id="fb" aria-live="polite"></div><button class="cta" id="nx" style="display:none" onclick="L.step++;drawLesson()">${step===n-1?"Sonucu gör":"Sıradaki soru"}</button></div>`;
+  const Q=L.qs[step-L.qOff];
+  app.innerHTML=`${head}<div class="lesson">${bar}${teamBar()}<div class="card q pop" style="min-height:0"><div class="ic">❓</div><h3>${esc(Q.q)}</h3></div>
+  ${Q.opts.map((o,i)=>`<button class="opt" data-i="${i}" onclick="answer(${i})"><b class="key">${String.fromCharCode(65+i)}</b><span>${esc(o.t)}</span></button>`).join("")}
+  <div class="fb" id="fb" aria-live="polite"></div><button class="cta" id="nx" style="display:none" onclick="L.step++;drawLesson()">${step===n-1?"Sonucu gör":"Sıradaki soru"}</button>${hint}</div>`;
  } else finish();
  window.scrollTo(0,0);
 }
 function answer(i){
- const Q=L.qs[L.step-L.u.p.length], btns=[...document.querySelectorAll(".opt")];
- if(btns.some(b=>b.disabled))return;
+ const Q=L.qs[L.step-L.qOff], btns=[...document.querySelectorAll(".opt")];
+ if(!Q||!btns[i]||btns.some(b=>b.disabled))return;
  btns.forEach((b,k)=>{b.disabled=true;if(Q.opts[k].ok)b.classList.add("ok")});
  const fb=document.getElementById("fb");
  if(Q.opts[i].ok){L.score++;fb.textContent="Aferin! Doğru cevap 🌟";fb.style.color="var(--green-d)"}
  else{btns[i].classList.add("no");fb.textContent="Doğru cevap yeşil olan. Bir dahakine! 💪";fb.style.color="var(--wrong)"}
  document.getElementById("nx").style.display="flex";
 }
+/* ---------- Takım puanları (sınıf modu) ---------- */
+let TEAMS=[0,0];
+function teamBar(){
+ if(!clsOn())return "";
+ return `<div class="teams">${TEAMS.map((v,i)=>`<div class="team t${i}"><span>${i?"B":"A"} Takımı</span><button aria-label="${i?"B":"A"} takımından puan sil" onclick="team(${i},-1)">−</button><b id="tm${i}">${v}</b><button aria-label="${i?"B":"A"} takımına puan ver" onclick="team(${i},1)">+</button></div>`).join("")}<button class="treset" aria-label="Takım puanlarını sıfırla" title="Puanları sıfırla" onclick="TEAMS=[0,0];team(0,0)">↺</button></div>`;
+}
+function team(i,d){TEAMS[i]=Math.max(0,TEAMS[i]+d);TEAMS.forEach((v,k)=>{const e=document.getElementById("tm"+k);if(e)e.textContent=v})}
 function finish(){
  const {ci,ui,score}=L, total=L.qs.length, k=uid(ci,ui), stars=score===total?3:score>=total*2/3?2:1;
  S.stars[k]=Math.max(S.stars[k]||0,stars);save();
  const n=nextUnit();
  const msg=stars===3?"Harika! Hepsini bildin!":stars===2?"Çok güzel!":"Tebrikler, üniteyi bitirdin!";
- app.innerHTML=`<div class="done pop"><div class="big">${starStr(stars)}</div><h2>${msg}</h2><p>${score} / ${total} doğru cevap</p>
- ${n?`<button class="cta" onclick="continueNext()">Sıradaki ünite</button>`:""}
+ app.innerHTML=`<div class="done pop">${teamBar()}<div class="big">${starStr(stars)}</div><h2>${msg}</h2><p>${score} / ${total} doğru cevap</p>
+ ${n?`<button class="cta" id="nxu" onclick="continueNext()">Sıradaki ünite</button>`:""}
  <button class="cta blue" onclick="openUnit(${ci},${ui})">Tekrar dene</button>
  <button class="ghost" onclick="go('home')">Ana sayfaya dön</button></div>`;
 }
 
+/* ---------- Klavye ve sunum kumandası ---------- */
+document.addEventListener("keydown",e=>{
+ if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ const k=e.key, onBtn=e.target.tagName==="BUTTON"&&(k===" "||k==="Enter");
+ if(k==="f"||k==="F"){toggleFS();return}
+ const fwd=["ArrowRight","PageDown"," ","Enter"].includes(k), back=k==="ArrowLeft"||k==="PageUp";
+ if(app.querySelector(".done")){if(fwd&&!onBtn){e.preventDefault();const b=document.getElementById("nxu");if(b)b.click()}return}
+ if(!L||!app.querySelector(".lesson"))return;
+ if(k==="Escape"){openCat(L.ci);return}
+ const idx="abc123".indexOf(k.toLowerCase());
+ if(idx>=0&&document.querySelector(".opt")){answer(idx%3);return}
+ if(fwd&&!onBtn){
+  e.preventDefault();
+  const nxt=document.getElementById("nxt"), nx=document.getElementById("nx");
+  if(nxt)nxt.click(); else if(nx&&nx.style.display!=="none")nx.click();
+ } else if(back){
+  e.preventDefault();
+  const prv=document.getElementById("prv"); if(prv)prv.click();
+ }
+});
+
+applyCls();
 go("home");
 </script>
 </body>
