@@ -25,3 +25,10 @@ Die App wird vor allem per Beamer oder Smartboard im Unterricht eingesetzt. Desh
 - **Gesprächsfrage:** Pro Ünite gibt es eine Frage (`d`) für die Klasse, damit nicht nur abgefragt, sondern auch gesprochen wird.
 - **Team-Punkte:** werden bewusst von Hand geführt (+/−) und nur im Speicher gehalten. So bleibt die Lehrkraft flexibel (Melden, Gruppenarbeit), und es werden keine Schülerdaten gespeichert.
 - **Layout:** Es passt ab 1280×720 ohne Scrollen. In Lektionen wird die untere Navigation ausgeblendet.
+
+## 8. Inhalte am Buch ausgerichtet (5. Auflage, Ankara 2019)
+Alle 29 Üniten wurden mit dem Buch abgeglichen und neu geschrieben. Inhalte, die nicht im Buch stehen, sind entfernt (z. B. Hilfu’l-Fudûl, Habeşistan, Suffe, Misvak). Dazugekommen sind die Schwerpunkte des Buchs: Besmele/Elhamdülillâh/Allâhü Ekber, 16 Esmâ, Farz/Sünnet/Helâl/Haram, Cuma (4+2+4), Teravih, Bayram namazı, was die Abdest und was das Gebet bricht, İftar duası, Alltags-Dua-Formeln, Hacerü’l-Esved, Safâ, Ebû Eyyûb, Veda Haccı, Sofra adabı, Özür/Teşekkür, „Yalancının mumu…“ usw.
+- Pro Ünite gibt es 6–8 Karten statt fest 6, damit umfangreiche Üniten (z. B. Namaz Kılıyorum, Örnek Kişiliği) nicht gekürzt werden müssen. Die Fragen bleiben bei 6, damit die Sternewertung vergleichbar bleibt.
+- Die Gesprächsfragen (`d`) greifen die Aktivitäten des Buchs auf (Düşünelim/Paylaşalım, Geschichten zum Weiterdenken).
+- Die Seitenangaben (`s`) sind für Lehrkräfte gedacht, um parallel im Buch zu arbeiten.
+- Das Buch selbst wird bewusst nicht ins öffentliche Repo gelegt (Urheberrecht © DİB).

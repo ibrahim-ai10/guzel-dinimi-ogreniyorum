@@ -5,7 +5,7 @@ Ein Unterrichts-Werkzeug für Lehrkräfte (auf Türkisch), aufgebaut nach dem Di
 ## Inhalt
 
 - **4 Bereiche:** İnanç · İbadet · Siyer · Ahlâk
-- **29 Üniten**, jede mit 6 Lernkarten und einem Quiz mit 6 Fragen (insgesamt 174 Lernkarten und 174 Fragen)
+- **29 Üniten** in der Reihenfolge des Buchs, jeweils mit Seitenangabe („📖 Kitap s. 8–13“), 6–8 Lernkarten, einer Gesprächsfrage für die Klasse und 6 Quizfragen (insgesamt 198 Lernkarten und 174 Fragen)
 - **Sterne-Fortschritt** (1–3 Sterne pro Ünite: alle richtig = 3, mindestens zwei Drittel = 2, sonst 1), lokal im Browser per `localStorage` gespeichert – keine Anmeldung, kein Server
 
 ## Im Unterricht: Sınıf Modu (Klassenmodus)
@@ -24,6 +24,6 @@ Die komplette App steckt in einer einzigen Datei: `index.html`. Einfach im Brows
 
 ## Hinweis zu den Inhalten
 
-Die Texte in der App sind **eigene, kurze Zusammenfassungen** und folgen lediglich der Themenreihenfolge des Buchs. Es wird kein Buchtext übernommen.
+Die Inhalte folgen der 5. Auflage (Ankara 2019) des Buchs: gleiche Üniten, gleiche Reihenfolge, Seitenangaben. Inhaltlich übernehmen sie die Schwerpunkte, Verse, Hadithe und Geschichten des Buchs, und aus den Aktivitäten des Buchs werden Gesprächsfragen. Die Texte sind **eigene, kurze Zusammenfassungen**; Buchtext wird nicht übernommen, das Buch selbst liegt nicht im Repo.
 
 Das Buch „Etkinliklerle Dinimi Öğreniyorum“ ist © Diyanet İşleri Başkanlığı.
