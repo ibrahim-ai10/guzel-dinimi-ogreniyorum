@@ -32,3 +32,8 @@ Alle 29 Üniten wurden mit dem Buch abgeglichen und neu geschrieben. Inhalte, di
 - Die Gesprächsfragen (`d`) greifen die Aktivitäten des Buchs auf (Düşünelim/Paylaşalım, Geschichten zum Weiterdenken).
 - Die Seitenangaben (`s`) sind für Lehrkräfte gedacht, um parallel im Buch zu arbeiten.
 - Das Buch selbst wird bewusst nicht ins öffentliche Repo gelegt (Urheberrecht © DİB).
+
+## 9. „Interaktives Buch“: eigener PDF-Leser + eigenes Arbeitsheft
+Das Buch ist © DİB, und Repo und Website sind öffentlich. Deshalb werden die Buchseiten **nicht** in die App eingebaut. Stattdessen gibt es zwei Teile:
+- **Buch-Leser:** Die Lehrkraft lädt ihr eigenes PDF; es bleibt lokal in IndexedDB. Die Darstellung übernimmt pdf.js 3.11.174 von jsDelivr. Das ist die erste Skript-Abhängigkeit, sie wird nur beim Öffnen des Lesers geladen; der Rest der App bleibt ohne Internet nutzbar. Das Blättern ist eine CSS-3D-Animation (Doppelseite: das Blatt dreht sich um den Buchrücken). Notizen werden als Vektoren in Seitenkoordinaten gespeichert, damit sie bei jeder Bildschirmgröße passen.
+- **Arbeitsheft:** Die Aufgaben des Buchs sind als eigene, automatisch prüfbare Aufgabentypen neu gestaltet (keine Kopie der Buchseiten). Bedient wird alles per Antippen statt Ziehen, das ist zuverlässiger auf Smartboard und Tablet. Lange Reihenfolge-Aufgaben stehen zweispaltig, damit sie ab 1280×720 ohne Scrollen passen.

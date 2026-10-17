@@ -18,6 +18,11 @@ Auf großen Bildschirmen (ab 1000 px Breite) ist der Klassenmodus automatisch an
 - **Steuerung mit Tastatur oder Presenter:** →, Leertaste oder Bild↓ für weiter, ← oder Bild↑ für zurück, A/B/C oder 1/2/3 zum Antworten, F für Vollbild, Esc zurück zur Üniten-Liste
 - **Fortschritt:** wird pro Gerät gespeichert. Am Lehrer-Laptop zeigt er also, was die Klasse schon durchgenommen hat.
 
+## 📖 Buch-Leser und ✏️ Arbeitsheft
+
+- **Buch-Leser (Tab „Kitap“ oder „📖 Kitap s. …“ an jeder Ünite):** Die Lehrkraft öffnet ihr eigenes PDF des Buchs. Mehrere Teildateien wie `001-100`, `101-200` und `201-224` können zusammen ausgewählt werden. Die Seiten werden mit Blätter-Animation angezeigt, am Beamer als Doppelseite. Mit Stift, Marker, Textfeld und Radierer lässt sich direkt auf die Seiten schreiben. **PDF und Notizen bleiben nur im Browser dieses Geräts (IndexedDB)**; nichts wird hochgeladen, und das Buch liegt nicht im Repo.
+- **Arbeitsheft (pro Ünite „✏️ Etkinlik“):** 99 eigene, an die Aktivitäten des Buchs angelehnte Aufgaben auf Papier-Seiten mit Blätter-Animation: Lückentext, Zuordnen, Reihenfolge, Sortieren, Richtig/Falsch, Wortsuche und Schreibaufgaben. Die Aufgaben werden automatisch geprüft; der Fortschritt wird gespeichert.
+
 ## Nutzung
 
 Die komplette App steckt in einer einzigen Datei: `index.html`. Einfach im Browser öffnen oder als statische Seite hosten (z. B. GitHub Pages oder Vercel).

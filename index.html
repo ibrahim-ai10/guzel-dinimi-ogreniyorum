@@ -14,6 +14,7 @@
   --gold:#f5b82e; --ink:#183a73; --muted:#5b6f93;
   --bg:#f3f7fd; --card:#ffffff; --line:#dfe7f4; --track:#e3eaf6;
   --wrong:#e25b4f; --wrong-l:#fdecea;
+  --paper:#fffdf6; --desk:#e9e2d4; --gold-l:#fff3cc;
   color-scheme: light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -24,7 +25,7 @@
     --blue:#5b92ee; --blue-d:#3d6fc4; --blue-l:#1b2a45;
     --green:#4cbf6c; --green-d:#38a057; --green-l:#17301f;
     --ink:#e6eeff; --muted:#a3b3d1; --bg:#0f1729; --card:#18233a;
-    --line:#26344f; --track:#24314b; --wrong:#ff7b6f; --wrong-l:#3a1f1e;
+    --line:#26344f; --track:#24314b; --wrong:#ff7b6f; --wrong-l:#3a1f1e; --paper:#1b2540; --desk:#0a1120; --gold-l:#3b3214;
     color-scheme: dark;
   }
 }
@@ -32,7 +33,7 @@
   --blue:#5b92ee; --blue-d:#3d6fc4; --blue-l:#1b2a45;
   --green:#4cbf6c; --green-d:#38a057; --green-l:#17301f;
   --ink:#e6eeff; --muted:#a3b3d1; --bg:#0f1729; --card:#18233a;
-  --line:#26344f; --track:#24314b; --wrong:#ff7b6f; --wrong-l:#3a1f1e;
+  --line:#26344f; --track:#24314b; --wrong:#ff7b6f; --wrong-l:#3a1f1e; --paper:#1b2540; --desk:#0a1120; --gold-l:#3b3214;
   color-scheme: dark;
 }
 *,*::before,*::after{box-sizing:inherit}
@@ -85,7 +86,7 @@ nav button.on::after{content:"";position:absolute;bottom:2px;width:36px;height:4
 .top.b{background:var(--blue)} .top.g{background:var(--green)}
 .top h2{margin:0;font-size:24px;line-height:1.1}
 .top .back{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:0 0 auto}
-.unit{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:10px}
+.unit{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:10px}
 .unit .num{flex:0 0 40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff}
 .unit .t{flex:1;font-weight:700;font-size:17px;line-height:1.2}
 .stars{font-size:15px;letter-spacing:1px;white-space:nowrap}
@@ -173,6 +174,119 @@ input[type=text]{width:100%;font:inherit;font-size:19px;padding:10px 14px;border
 :root.cls nav button{font-size:17px}
 @media (max-height:800px){:root.cls .hint{display:none}:root.cls .lesson{padding-top:16px}:root.cls .teams{margin-bottom:10px}:root.cls .fb{min-height:36px;margin-top:8px}:root.cls .lesson .cta{margin:10px 0 0;padding:12px}:root.cls .card.q{padding:14px 32px}:root.cls .card.q h3{font-size:clamp(24px,min(2.8vw,5vh),44px)}:root.cls .opt{font-size:clamp(20px,min(2.2vw,3.7vh),34px);padding:8px 20px;margin-top:9px}:root.cls .key{width:1.55em;height:1.55em}:root.cls .teams{margin-bottom:8px}:root.cls .team button{width:34px;height:34px}:root.cls .steps{margin-bottom:10px}:root.cls .app:has(.lesson){padding-bottom:0}}
 @media (max-width:800px){:root.cls .grid{grid-template-columns:1fr 1fr}:root.cls .ulist{display:block}:root.cls main,:root.cls .lesson{padding-left:16px;padding-right:16px}:root.cls .card{padding:28px 24px}}
+/* ---------- Kitap okuyucu + Etkinlik defteri ---------- */
+html.ovon body{overflow:hidden}
+.ov{position:fixed;inset:0;z-index:30;background:var(--desk);display:flex;flex-direction:column}
+.ovbar{display:flex;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top,0px));color:#fff;flex:0 0 auto}
+.ovbar.b{background:var(--blue)} .ovbar.g{background:var(--green)}
+.ovbar h2{margin:0;font-size:20px;line-height:1.15;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ovbar h2 small{display:block;font-size:13px;opacity:.85;font-weight:600}
+.ovbar .back{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;flex:0 0 auto}
+.ovstage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px;position:relative}
+.side{width:52px;height:52px;border-radius:50%;background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.18);font-size:34px;line-height:1;flex:0 0 auto;padding-bottom:4px}
+.wbook{position:relative;width:min(1100px,100%);height:100%;perspective:2400px}
+.leafpage{position:absolute;inset:0;transform-origin:left center;backface-visibility:hidden}
+.turnOut{animation:turnOut .6s cubic-bezier(.4,.1,.3,1) forwards;z-index:3}
+.turnIn{animation:turnIn .6s cubic-bezier(.4,.1,.3,1) forwards;z-index:3}
+@keyframes turnOut{0%{transform:rotateY(0);filter:brightness(1)}100%{transform:rotateY(-98deg);filter:brightness(.6)}}
+@keyframes turnIn{0%{transform:rotateY(-98deg);filter:brightness(.6)}100%{transform:rotateY(0);filter:brightness(1)}}
+/* Defter sayfası */
+.wpage{background:var(--paper);color:var(--ink);border-radius:6px 18px 18px 6px;box-shadow:inset 16px 0 20px -16px rgba(0,0,0,.35),0 12px 34px rgba(40,30,10,.28);padding:20px 28px 14px 44px;display:flex;flex-direction:column;overflow:hidden}
+.wpage::before{content:"";position:absolute;left:24px;top:0;bottom:0;border-left:2px solid rgba(226,91,79,.28)}
+.wpage::after{content:"";position:absolute;left:8px;top:8%;bottom:8%;width:8px;background:radial-gradient(circle,rgba(0,0,0,.18) 3px,transparent 4px) 0 0/8px 34px repeat-y}
+.wph{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.wtag{font-weight:800;font-size:14px;color:#fff;padding:3px 12px;border-radius:999px;background:var(--blue)} .wtag.g{background:var(--green)}
+.wok{color:var(--green-d);font-weight:800}
+.wpage h3{margin:6px 0 0;font-size:26px;line-height:1.15;color:var(--blue-d);display:flex;align-items:center;gap:10px}
+.we{font-size:32px}
+.winst{margin:2px 0 10px;color:var(--muted);font-size:15px}
+.wbody{flex:1;min-height:0;overflow:auto;padding:4px 2px 8px}
+.wfoot{display:flex;align-items:center;gap:10px;padding-top:10px;border-top:2px dotted var(--line)}
+.wfb{flex:1;font-weight:800;font-size:17px} .wfb.ok{color:var(--green-d)} .wfb.no{color:var(--wrong)}
+.wbtn{padding:9px 18px;border-radius:999px;background:var(--green);color:#fff;font-weight:800;box-shadow:0 3px 0 var(--green-d)}
+.wbtn.ghostb{background:transparent;color:var(--muted);box-shadow:none;border:2px solid var(--line)}
+.wpn{font-weight:800;color:var(--muted);min-width:2ch;text-align:right}
+.wbody .ok{background:var(--green-l)!important;border-color:var(--green)!important}
+.wbody .no{background:var(--wrong-l)!important;border-color:var(--wrong)!important}
+.muted{color:var(--muted)}
+.lines{margin:0;padding-left:1.5em;line-height:2.4;font-size:20px}
+.blank{min-width:110px;border-bottom:3px dashed var(--blue);padding:0 10px;margin:0 4px;font-weight:800;color:var(--blue-d);border-radius:8px 8px 0 0;line-height:1.6}
+.blank.sel{background:var(--gold-l);border-bottom-color:var(--gold)} .blank.full{border-bottom-style:solid}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding:12px;border-radius:14px;background:var(--bg);border:2px dashed var(--line)}
+.chipw{padding:7px 14px;border-radius:12px;background:var(--card);color:var(--ink);border:2px solid var(--line);font-weight:700;font-size:18px;box-shadow:0 2px 0 var(--line);text-align:left}
+.chipw.sel{border-color:var(--gold);background:var(--gold-l)}
+.chipw.used{opacity:.3}
+.mcols{display:grid;grid-template-columns:1fr 1fr;gap:0 44px}
+.mi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 14px;margin-bottom:9px;border-radius:12px;border:2px solid var(--line);background:var(--card);font-weight:700;font-size:18px}
+.mi .dot{width:18px;height:18px;border-radius:50%;border:3px solid var(--mc,var(--line));background:var(--mc,transparent);flex:0 0 auto}
+.mi[style*="--mc"]{border-color:var(--mc)}
+.mi.sel{border-color:var(--gold);background:var(--gold-l)}
+.oans{display:grid;gap:8px}
+.oans.two{grid-template-columns:1fr 1fr}
+@media (max-width:640px){.oans.two{grid-template-columns:1fr}}
+.oslot{display:flex;align-items:center;gap:12px;padding:7px 12px;border-radius:12px;border:2px dashed var(--line);font-size:18px;font-weight:700;text-align:left;width:100%;background:transparent;color:var(--muted)}
+.oslot b{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;flex:0 0 auto}
+.oslot.full{border-style:solid;background:var(--card);color:var(--ink)}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+.bin{min-height:110px;border-radius:16px;border:3px dashed var(--line);padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;cursor:pointer;background:var(--card)}
+.bin h4{width:100%;margin:0 0 4px;font-size:18px;color:var(--blue-d)}
+.bin.hot{border-color:var(--gold);background:var(--gold-l)}
+.tfi{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:9px 14px;border-radius:12px;border:2px solid var(--line);margin-bottom:9px;font-size:19px;font-weight:600;background:var(--card)}
+.tfb{display:flex;gap:6px;flex:0 0 auto}
+.tfb button{padding:6px 14px;border-radius:999px;border:2px solid var(--line);font-weight:800;background:var(--card)}
+.tfb button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.wsw{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.wsg{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:4px;width:min(100%,calc(var(--n) * 50px))}
+.wc{aspect-ratio:1;border-radius:8px;background:var(--card);border:2px solid var(--line);font-weight:800;font-size:clamp(15px,2vw,24px);padding:0}
+.wc.a{background:var(--gold);color:#fff;border-color:var(--gold)} .wc.f{background:var(--green-l);border-color:var(--green);color:var(--green-d)}
+.wsl{list-style:none;padding:0;margin:0;display:grid;gap:6px;font-weight:800;font-size:19px} .wsl li.f{color:var(--green-d);text-decoration:line-through}
+.wq{display:block;margin-bottom:12px} .wq span{display:block;font-weight:700;font-size:19px;margin-bottom:6px}
+.wq textarea{width:100%;font:inherit;font-size:18px;padding:0 12px;border-radius:12px;border:2px solid var(--line);background:var(--card) repeating-linear-gradient(transparent 0 31px,var(--line) 31px 32px);line-height:32px;color:var(--ink);resize:vertical}
+.wend{margin:auto;text-align:center;width:min(520px,100%)} .wend .big{font-size:84px;line-height:1} .wend h3{justify-content:center}
+/* Kitap okuyucu */
+.rbar{flex-wrap:wrap;row-gap:8px}
+.rnav{display:flex;align-items:center;gap:6px}
+.rb{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.22);font-size:26px;line-height:1;color:#fff;padding-bottom:3px}
+.rpg{display:flex;align-items:center;gap:4px;font-weight:700}
+.rpg input{width:66px;font:inherit;font-weight:800;text-align:center;border-radius:10px;border:0;padding:4px;color:#183a73;background:#fff}
+.rtot{font-weight:700;opacity:.9}
+.rtools{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.rt{min-width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.16);font-size:18px;font-weight:800;color:#fff}
+.rt.on{background:#fff;color:#1f4fa8}
+.rc{width:26px;height:26px;border-radius:50%;background:var(--c);border:3px solid rgba(255,255,255,.55)} .rc.on{border-color:#fff;box-shadow:0 0 0 2px var(--c)}
+.rsep{width:1px;height:26px;background:rgba(255,255,255,.35);margin:0 4px}
+.rbook{position:relative}
+.spread{display:flex;position:relative;perspective:2600px;box-shadow:0 16px 44px rgba(30,20,0,.38)}
+.spread::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:44px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(0,0,0,.14) 42%,rgba(0,0,0,.26) 50%,rgba(0,0,0,.14) 58%,transparent);pointer-events:none;z-index:4}
+.sp1{box-shadow:0 16px 44px rgba(30,20,0,.38)}
+.ppage{position:relative;background:#fff;overflow:hidden;flex:0 0 auto}
+.ppage.blank{background:transparent}
+.ppage canvas{position:absolute;inset:0;width:100%;height:100%}
+.ppage .ac{touch-action:none}
+html[data-rtool="hand"] .ppage .ac{pointer-events:none}
+html:not([data-rtool="hand"]) .ppage .ac{cursor:crosshair}
+.leaf{position:absolute;top:0;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.45,.05,.35,1);z-index:6}
+.leaf.fwd{left:50%;transform-origin:left center} .leaf.bwd{left:0;transform-origin:right center}
+.leaf.fwd.go{transform:rotateY(-180deg)} .leaf.bwd.go{transform:rotateY(180deg)}
+.leaf .face{position:absolute;inset:0;backface-visibility:hidden;box-shadow:0 0 18px rgba(0,0,0,.2)}
+.leaf .back{transform:rotateY(180deg)}
+.rsetup{max-width:540px;margin:auto;background:var(--card);border-radius:22px;padding:26px 28px;text-align:center;box-shadow:0 12px 34px rgba(0,0,0,.18)}
+.rsetup .big{font-size:64px;line-height:1} .rsetup h3{margin:8px 0;font-size:26px;color:var(--blue-d)} .rsetup .err{color:var(--wrong);font-weight:700}
+.rsetup label.cta{cursor:pointer}
+.spin{width:44px;height:44px;border-radius:50%;border:5px solid var(--line);border-top-color:var(--blue);margin:0 auto;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rset{position:absolute;top:12px;right:12px;z-index:9;background:var(--card);border-radius:18px;padding:16px;width:min(330px,92%);box-shadow:0 12px 34px rgba(0,0,0,.28)}
+.rset h4{margin:0 0 6px;font-size:19px} .rset label.ghost{cursor:pointer;text-align:center}
+.rtext{position:absolute;z-index:7;min-width:160px;min-height:2em;border:2px dashed currentColor;background:rgba(255,255,255,.9);font-family:"Baloo 2",system-ui,sans-serif;font-weight:700;padding:2px 6px;border-radius:6px;resize:both}
+/* Üniteler: kitap ve etkinlik kısayolları */
+.ub{display:flex;align-items:center;gap:12px;width:100%;text-align:left}
+.uacts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0 52px}
+.chip{padding:5px 12px;border-radius:999px;border:2px solid var(--line);font-weight:700;font-size:14px;color:var(--muted);background:var(--bg)}
+.chip.done{border-color:var(--green);color:var(--green-d);background:var(--green-l)}
+:root.cls .chip{font-size:17px;padding:6px 14px}
+:root.cls .uacts{margin-left:60px}
+@media (max-width:640px){.wpage{padding:16px 14px 12px 26px}.wpage::before{left:14px}.wpage::after{display:none}.wpage h3{font-size:21px}.lines{font-size:18px}.mcols{gap:0 10px}.mi,.chipw,.tfi{font-size:16px}.side{display:none}.tfi{flex-direction:column;align-items:flex-start}.uacts{margin-left:0}}
+@media (max-height:800px){.wpage{padding-top:14px}.wpage h3{font-size:22px}.lines{line-height:2.1}}
 </style>
 </head>
 <body>
@@ -594,6 +708,140 @@ const CATS = [
 ];
 const TOTAL = CATS.reduce((a,c)=>a+c.units.length,0);
 
+/* ---------- Etkinlik defteri: kitabın etkinliklerinden esinlenen, kendimizin hazırladığı ünite etkinlikleri ----------
+   k: fill (boşluk doldurma, [cevap] köşeli parantezde, x: çeldirici kelimeler) · match (eşleştirme) · order (sıralama, doğru sırayla)
+      sort (kutulara ayırma, i:[metin, kutuNo]) · tf (doğru/yanlış) · ws (kelime avı, büyük harf) · write (düşün-yaz, kontrol yok) */
+const WB={
+"inanc-0":[
+ {k:"fill",e:"🧩",h:"Boşlukları Dolduralım",t:["“Lâ ilâhe illallah Muhammedün resûlullah” sözüne kelime-i [tevhid] denir.","Bu sözleri inanarak söyleyen kişiye [Müslüman] denir.","Bir işe başlarken [besmele] çekeriz.","Güzel bir işin sonunda “[Elhamdülillâh]” deriz.","Allah’ın en büyük olduğunu “Allâhü [Ekber]” diyerek söyleriz."],x:["hafız","Âmin"]},
+ {k:"order",e:"🔤",h:"Kelime-i Tevhidi Sıralayalım",i:["Lâ","ilâhe","illallah","Muhammedün","resûlullah"]},
+ {k:"match",e:"🔗",h:"Ne Zaman Söyleriz?",p:[["Bismillâhirrahmânirrahîm","Bir işe başlarken"],["Elhamdülillâh","Bir nimet için şükrederken"],["Allâhü Ekber","Allah’ın en büyük olduğunu söylerken"],["Lâ ilâhe illallah","Allah’ın bir olduğunu söylerken"]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Kelime-i tevhidin anlamını kendi cümlelerinle yaz.","Çevrende kelime-i tevhid yazılı bir levha gördün mü? Nerede gördün?"]}],
+"inanc-1":[
+ {k:"sort",e:"🗂️",h:"Doğru Kutuya Yerleştirelim",c:["İslam’ın esasları","İmanın esasları"],i:[["Namaz kılmak",0],["Allah’a inanmak",1],["Oruç tutmak",0],["Meleklere inanmak",1],["Zekât vermek",0],["Kitaplara inanmak",1],["Hacca gitmek",0],["Peygamberlere inanmak",1],["Kelime-i şehâdet getirmek",0],["Âhiret gününe inanmak",1],["Kader ve kazaya inanmak",1]]},
+ {k:"order",e:"🎵",h:"Âmentü Sırasıyla İmanın Esasları",i:["Allah’a inanmak","Meleklere inanmak","Kitaplara inanmak","Peygamberlere inanmak","Âhiret gününe inanmak","Kader ve kazaya inanmak"]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Âmentü “inandım” demektir.",true],["İslam’ın altı esası vardır.",false],["Peygamberimizin sözlerine hadis denir.",true],["Müslüman, elinden ve dilinden kimseye zarar gelmeyen kişidir.",true]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Bugün elinle ve dilinle kimi, nasıl mutlu edebilirsin?"]}],
+"inanc-2":[
+ {k:"match",e:"✨",h:"Allah’ın Güzel İsimleri",p:[["el-Hâlık","Her şeyi yaratan"],["er-Rezzâk","Rızık veren"],["el-Basîr","Her şeyi gören"],["es-Semî‘","Her şeyi işiten"],["el-Vedûd","Kullarını çok seven"],["el-Ğaffâr","Hataları bağışlayan"]]},
+ {k:"fill",e:"🌌",h:"Boşlukları Dolduralım",t:["Allah’ın [99] güzel ismi vardır.","Allah’ın güzel isimlerine Esmâ-ül [Hüsnâ] denir.","Güneş dünyaya çok yakın olsaydı her şey [yanardı].","Allah insana akıl ve [irade] verdi."],x:["114","donardı"]},
+ {k:"tf",e:"📖",h:"İhlâs Sûresi’ni Hatırlayalım",i:[["Allah doğurmamış ve doğmamıştır.",true],["Allah’ın bir benzeri vardır.",false],["Her şey Allah’a muhtaçtır.",true],["Kâinat kendi kendine oluştu.",false]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Allah’ın sana verdiği üç nimeti yaz.","Bu nimetler için Allah’a bir teşekkür cümlesi yaz."]}],
+"inanc-3":[
+ {k:"ws",e:"🔍",h:"Dört Büyük Melek",w:["CEBRAİL","MİKAİL","İSRAFİL","AZRAİL"],n:8},
+ {k:"match",e:"🔗",h:"Melekler ve Görevleri",p:[["Cebrâil","Vahyi peygamberlere getirir"],["Mikâil","Yağmur, rüzgâr gibi tabiat olaylarıyla görevlidir"],["İsrâfil","Sûr’a üfleyecektir"],["Azrâil","Ölüm meleğidir"]]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Melekler nurdan yaratılmıştır.",true],["Melekler yemek yer ve uyur.",false],["Melekler sadece cennette yaşar.",false],["Melekler, iyilik yaptığımızda sevinir.",true]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["“Melek gibi insan” sözünü hangi insanlar için kullanırız? Bir örnek yaz."]}],
+"inanc-4":[
+ {k:"match",e:"📚",h:"Kitaplar ve Peygamberler",p:[["Tevrat","Hz. Mûsâ"],["Zebûr","Hz. Dâvûd"],["İncil","Hz. Îsâ"],["Kur’an-ı Kerim","Hz. Muhammed"]]},
+ {k:"fill",e:"📗",h:"Kur’an-ı Kerim’i Tanıyalım",t:["Kur’an-ı Kerim’de [114] sure vardır.","İlk sure [Fâtiha], son sure Nâs’tır.","En uzun sure [Bakara], en kısa sure Kevser’dir.","Kur’an [610] yılında indirilmeye başlandı.","Kur’an’ın tamamını ezberleyene [hafız] denir."],x:["622","İhlâs","imam"]},
+ {k:"ws",e:"🔍",h:"Kelime Avı",w:["HATİM","HAFIZ","CÜZ","AYET","SURE","KURAN"],n:8},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Kur’an okumayı öğrenmek senin için neden önemli?"]}],
+"inanc-5":[
+ {k:"match",e:"⭐",h:"Peygamberlerin Özellikleri",p:[["Sıdk","Her zaman doğru sözlü olmak"],["Emanet","Güvenilir olmak"],["Fetânet","Akıllı ve anlayışlı olmak"],["İsmet","Günah işlemekten korunmuş olmak"],["Tebliğ","Allah’ın sözlerini insanlara ulaştırmak"]]},
+ {k:"ws",e:"🔍",h:"Peygamber İsimleri",w:["ADEM","NUH","MUSA","İSA","YUSUF","DAVUD"],n:8},
+ {k:"order",e:"🌊",h:"Hz. Mûsâ’nın Hikâyesini Sıralayalım",i:["Annesi onu bir beşikle Nil’e bıraktı","Beşik Firavun’un sarayına ulaştı","Annesi sütanne olarak saraya çağrıldı","Mûsâ büyüyünce peygamber oldu","Asâsını denize vurdu, deniz ikiye ayrıldı"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Güvenilir bir insanın üç özelliğini yaz."]}],
+"inanc-6":[
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Ölüm her şeyin sonudur.",false],["Âhirette dünyada yaptıklarımızın karşılığını alırız.",true],["Namaz kılmak bize huzur verir.",true],["Allah zalimleri sever.",false],["Cennette hiçbir gözün görmediği nimetler vardır.",true]]},
+ {k:"sort",e:"⚖️",h:"Âhirette Bizi Ne Sevindirir?",c:["Sevindirir 😊","Üzer 😟"],i:[["Yardım etmek",0],["Yalan söylemek",1],["Namaz kılmak",0],["Kırıcı olmak",1],["Paylaşmak",0],["Başkasının hakkını yemek",1]]},
+ {k:"write",e:"✍️",h:"Hayal Et ve Yaz",i:["Cennette nelerin olmasını isterdin?","Âhirete inanmak seni hangi iyiliklere yönlendirir?"]}],
+"inanc-7":[
+ {k:"fill",e:"📐",h:"Boşlukları Dolduralım",t:["Allah’ın her şeyi önceden bilmesine [kader] denir.","Olayların vakti gelince meydana gelmesine [kaza] denir.","Elimizden geleni yapıp sonucu Allah’a bırakmaya [tevekkül] denir.","İstediğimiz olmazsa [ümitsizliğe] düşmeyiz."],x:["tembellik","irade"]},
+ {k:"order",e:"🌱",h:"Tohumun Yolculuğu",i:["Tohum toprağa gömülür","Karanlıkta bekler","Yağmurla toprak ıslanır","Filiz topraktan çıkar","Rengârenk bir çiçek açar"]},
+ {k:"sort",e:"🚦",h:"Doğru mu Davranış, Yanlış mı?",c:["Doğru davranış","Yanlış davranış"],i:[["Ders çalışıp dua etmek",0],["“Nasılsa olur” deyip çalışmamak",1],["Başarınca şükretmek",0],["Hemen pes etmek",1],["Sabretmek",0],["Başkalarını suçlamak",1]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Önce hoşuna gitmeyen ama sonra “iyi ki olmuş” dediğin bir olayı anlat."]}],
+"ibadet-0":[
+ {k:"sort",e:"💚",h:"İbadet mi, Değil mi?",c:["İbadettir","İbadet değildir"],i:[["Yoldaki taşı kaldırmak",0],["Gülümsemek",0],["Kırıcı söz söylemek",1],["Hastayı ziyaret etmek",0],["Arkadaşıyla alay etmek",1],["Susamış hayvana su vermek",0],["Yalan söylemek",1]]},
+ {k:"match",e:"🔗",h:"Kavramları Eşleştirelim",p:[["Farz","Allah’ın kesin olarak istediği ibadet"],["Sünnet","Peygamberimizin söz ve davranışları"],["Helâl","Yasak olmayan, serbest olan"],["Haram","Kesin olarak yasaklanan"],["Sevap","İyiliklerin karşılığında verilen ödül"]]},
+ {k:"fill",e:"🧩",h:"Boşlukları Dolduralım",t:["Her güzel iş bir [ibadettir].","Namaz kılabilmek için önce [abdest] alırız.","Namazda yüzümüzü [kıbleye] döneriz.","Zekât [malla] yapılan bir ibadettir."],x:["bedenle","günahtır"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Bugün Allah rızası için yapabileceğin iki küçük iyiliği yaz."]}],
+"ibadet-1":[
+ {k:"match",e:"🕌",h:"Caminin Bölümleri",p:[["Mihrap","İmamın namaz kıldırdığı yer"],["Minber","Cuma ve bayram hutbesinin okunduğu yer"],["Kürsü","Vaaz ve sohbet yeri"],["Kubbe","Yarım küre biçimli tavan"],["Minare","Ezan okunan yer"],["Şadırvan","Abdest çeşmeleri"]]},
+ {k:"order",e:"🔊",h:"Ezanı Sıralayalım",i:["Allâhü Ekber","Eşhedü en lâ ilâhe illallah","Eşhedü enne Muhammeden resûlullah","Hayye ale’s-salâh","Hayye ale’l-felâh","Lâ ilâhe illallah"]},
+ {k:"fill",e:"📣",h:"Boşlukları Dolduralım",t:["Ezan okuyan kişiye [müezzin] denir.","Namaz kıldıran kişiye [imam] denir.","İlk ezanı Hz. [Bilâl] okudu.","Farz namazdan önce [kamet] getirilir."],x:["hafız","Ömer"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Evine en yakın caminin adı ne?","Caminin en çok hangi bölümünü seviyorsun? Neden?"]}],
+"ibadet-2":[
+ {k:"order",e:"💧",h:"Abdest Bulutları: Doğru Sıra",i:["Besmele çekip niyet ederim","Ellerimi yıkarım","Ağzımı çalkalarım","Burnumu temizlerim","Yüzümü yıkarım","Kollarımı yıkarım","Başımı meshederim","Kulaklarımı ve boynumu meshederim","Ayaklarımı yıkarım"]},
+ {k:"sort",e:"🗂️",h:"Namazın 12 Farzı",c:["Namazın dışındaki farzlar","Namazın içindeki farzlar"],i:[["Abdest almak",0],["İftitah tekbiri",1],["Temiz olmak",0],["Kıyam",1],["Örtünmek",0],["Kıraat",1],["Kıbleye yönelmek",0],["Rükû",1],["Vaktin girmesi",0],["Secde",1],["Niyet",0],["Son oturuş",1]]},
+ {k:"sort",e:"✋",h:"Abdesti Bozar mı?",c:["Bozar","Bozmaz"],i:[["Uyumak",0],["Terlemek",1],["Bayılmak",0],["Konuşmak",1],["Namazda sesli gülmek",0],["Su içmek",1]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Namaz kılmanın sana ne gibi faydaları var?"]}],
+"ibadet-3":[
+ {k:"order",e:"🌅",h:"Namaz Vakitlerini Sıralayalım",i:["Sabah","Öğle","İkindi","Akşam","Yatsı"]},
+ {k:"match",e:"🔢",h:"Namazlar Kaç Rekât?",p:[["Sabah namazı","2 sünnet + 2 farz"],["İkindi namazı","4 sünnet + 4 farz"],["Akşam namazı","3 farz + 2 sünnet"],["Yatsı namazı","4 + 4 + 2 ve 3 vitir"],["Cuma namazı","4 sünnet + 2 farz + 4 son sünnet"],["Bayram namazı","2 rekât"]]},
+ {k:"sort",e:"🚫",h:"Namazı Bozar mı?",c:["Bozar","Bozmaz"],i:[["Konuşmak",0],["Kur’an okumak",1],["Gülmek",0],["Rükûya eğilmek",1],["Bir şey içmek",0],["Secde etmek",1],["Abdestin bozulması",0],["Terlemek",1]]},
+ {k:"write",e:"🪪",h:"Namaz Kimlik Kartı",i:["Bir namaz seç ve kimlik kartını yaz: adı, vakti, rekât sayısı."]}],
+"ibadet-4":[
+ {k:"fill",e:"🌙",h:"Ramazan Kavramları",t:["İmsaktan önce yenen yemeğe [sahur] denir.","Akşam ezanıyla orucu açmaya [iftar] denir.","Bayramdan bir önceki güne [arefe] denir.","Unutarak bir şey yemek orucu [bozmaz].","Ramazan’da yatsıdan sonra [teravih] namazı kılınır."],x:["kandil","bozar"]},
+ {k:"sort",e:"❓",h:"Orucum Bozuldu mu?",c:["Orucu bozar","Orucu bozmaz"],i:[["Bilerek yemek yemek",0],["Unutarak bir şey yemek",1],["Bilerek su içmek",0],["Uyumak",1],["Yıkanmak",1]]},
+ {k:"write",e:"🎤",h:"Araştırmacı Gazeteci",i:["Ailenden bir büyüğüne sor: İlk orucunu kaç yaşında tuttun?","Çocukluğundaki Ramazanlar nasıldı? Cevaplarını yaz."]}],
+"ibadet-5":[
+ {k:"fill",e:"🤝",h:"Boşlukları Dolduralım",t:["Zekât, zekâtı verilecek malın [kırkta] biridir.","Ramazan’da bayramdan önce verilen sadakaya [fitre] denir.","Allah rızası için karşılıksız yapılan yardıma [sadaka] denir.","Zekât cimriliği ve [kıskançlığı] önler."],x:["yarısı","sevgiyi"]},
+ {k:"sort",e:"💝",h:"Sadaka mı?",c:["Sadakadır","Sadaka değildir"],i:[["Kuşlara yem koymak",0],["Güler yüz göstermek",0],["Yoldaki çöpü kaldırmak",0],["Arkadaşıyla alay etmek",1],["Yemeği israf etmek",1]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Para harcamadan yapabileceğin üç sadaka yaz."]}],
+"ibadet-6":[
+ {k:"match",e:"🕋",h:"Hac Kavramları",p:[["İhram","Hacıların giydiği beyaz kıyafet"],["Tavaf","Kâbe’nin etrafında dönmek"],["Arafat","Hacıların toplandığı kutsal yer"],["Kurban Bayramı","Hac günlerinde kutlanan bayram"],["Umre","Hac dışında yapılan Kâbe ziyareti"]]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Hac, gücü yetene her yıl farzdır.",false],["Kâbe Mekke’dedir.",true],["Peygamberimizin kabri Mekke’dedir.",false],["Hacda zengin, fakir herkes eşittir.",true]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Hacca giden bir büyüğüne haccın faydalarını sor ve yaz."]}],
+"ibadet-7":[
+ {k:"match",e:"💬",h:"Hangi Durumda Ne Deriz?",p:[["Hasta birine","Geçmiş olsun, Allah şifa versin"],["Yola çıkan birine","Allah’a emanet ol"],["Sınava girecek birine","Allah zihin açıklığı versin"],["Yemekten sonra","Elhamdülillâh"],["Bir işe başlarken","Bismillâh"]]},
+ {k:"fill",e:"🤲",h:"Boşlukları Dolduralım",t:["Dua, her şeye gücü yeten [Allah’tan] istemektir.","Yeryüzündeki her şey Allah’a [muhtaçtır].","Duanın sonunda “[Âmin]” deriz.","Dua etmek bize [güven] verir."],x:["meleklerden","korku"]},
+ {k:"write",e:"✍️",h:"Kendi Duam",i:["Kendi sözlerinle kısa bir dua yaz.","Sıkıntısı olanlar için bir dua yaz."]}],
+"siyer-0":[
+ {k:"match",e:"🌸",h:"Peygamberimizin Çevresi",p:[["Annesi","Hz. Âmine"],["Babası","Abdullah"],["Dedesi","Abdülmuttalib"],["Sütannesi","Halime"],["Amcası","Ebû Tâlib"],["Eşi","Hz. Hatice"]]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Peygamberimiz Medine’de doğdu.",false],["Muhammed “övülen kişi” demektir.",true],["Peygamberimizin sütannesinin adı Fâtıma’dır.",false],["Annesi vefat ettiğinde Peygamberimiz altı yaşındaydı.",true],["Peygamberimiz 25 yaşında Hz. Hatice ile evlendi.",true]]},
+ {k:"order",e:"📅",h:"Olayları Sıralayalım",i:["571’de Mekke’de doğdu","Altı yaşında annesini kaybetti","Sekiz yaşında amcasının yanına gitti","25 yaşında Hz. Hatice ile evlendi","35 yaşında Hacerü’l-Esved anlaşmazlığını çözdü"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Hacerü’l-Esved olayı bize ne öğretiyor?"]}],
+"siyer-1":[
+ {k:"fill",e:"⛰️",h:"Boşlukları Dolduralım",t:["İlk vahiy [Hira] Mağarası’nda geldi.","Peygamberimiz o zaman [40] yaşındaydı.","İlk inen ayetler “[Oku]!” emriyle başlar.","Peygamberimize ilk inanan Hz. [Hatice] oldu.","Peygamberimiz Mekkelileri [Safâ] tepesinde İslam’a çağırdı."],x:["Sevr","Yaz","25"]},
+ {k:"ws",e:"🔍",h:"İlk Müslümanlardan Bazıları",w:["HATİCE","EBUBEKİR","ALİ","BİLAL","ZEYD"],n:9},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Üzgün bir arkadaşını nasıl teselli edersin? Ona ne söylersin?"]}],
+"siyer-2":[
+ {k:"order",e:"🐪",h:"Hicret Yolculuğunu Sıralayalım",i:["Hz. Ali, Peygamberimizin yatağında yattı","Sevr Mağarası’nda üç gün saklandılar","Kuba’da ilk mescidi yaptılar","Medineliler onları coşkuyla karşıladı","Ebû Eyyûb’un evinde misafir kaldı"]},
+ {k:"match",e:"🔗",h:"Kim Ne Yaptı?",p:[["Hz. Ali","Emanetleri sahiplerine verdi"],["Hz. Ebû Bekir","Hicrette yol arkadaşı oldu"],["Esmâ","Mağaraya yiyecek getirdi"],["Abdullah","Mekke’den haber taşıdı"],["Ebû Eyyûb el-Ensârî","Peygamberimizi evinde ağırladı"]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Göç etmek zorunda kalan insanlara nasıl yardım edebiliriz?"]}],
+"siyer-3":[
+ {k:"match",e:"📅",h:"Bu Tarihte Ne Oldu?",p:[["571","Peygamberimiz doğdu"],["610","İlk vahiy geldi"],["622","Medine’ye hicret edildi"],["630","Mekke fethedildi"],["632","Veda Haccı yapıldı"]]},
+ {k:"fill",e:"🤗",h:"Boşlukları Dolduralım",t:["Mekke’den göç eden Müslümanlara [muhacir] denir.","Onlara yardım eden Medinelilere [ensar] denir.","Peygamberimizin son haccına [Veda] Haccı denir.","Peygamberimizin kabri [Medine]’dedir."],x:["Mekke","imam"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Kardeş olanlar birbirine nasıl davranmalı?"]}],
+"siyer-4":[
+ {k:"match",e:"🌟",h:"Hangi Özelliği Anlatıyor?",p:[["Anne serçeye yavrularını geri verdirdi","Merhametli"],["Enes’e bir kez bile “Of!” demedi","Sabırlı ve hoşgörülü"],["Sütannesi için hırkasını yere serdi","Vefalı"],["Beğenilen kumaşı hemen hediye etti","Cömert"],["Kendi işini kendisi yaptı","Alçak gönüllü"],["Herkese eşit davrandı","Âdil"]]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Peygamberimiz çocuklarla oyun oynardı.",true],["Peygamberimiz ikram edilen yemeği kötülerdi.",false],["Peygamberimizin en yakın dostu Hz. Ebû Bekir’di.",true],["Peygamberimiz hayvanlara iyi davranılmasını isterdi.",true]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Peygamberimizin zamanında yaşasaydın ona ne sormak isterdin?","Onun hangi davranışını bu hafta örnek alacaksın?"]}],
+"ahlak-0":[
+ {k:"sort",e:"🚦",h:"Yeşilde Geç, Kırmızıda Dur!",c:["🟢 Güzel davranış","🔴 Güzel olmayan davranış"],i:[["Babasıyla birlikte namaz kılmak",0],["Başkasının eşyasını izinsiz kullanmak",1],["Güvenilir olmak",0],["Bitki ve hayvanlara zarar vermek",1],["Yemeğe besmeleyle başlamak",0],["Oyuncağını arkadaşına hediye etmek",0],["Yemeği israf etmek",1]]},
+ {k:"fill",e:"🍽️",h:"Sofra Adabı",t:["Yemeğe [besmele] ile başlarız.","Yemeği [sağ] elimizle yeriz.","Suyu oturarak ve [üç] yudumda içeriz.","Yemekten sonra “[Elhamdülillâh]” deriz."],x:["sol","bir"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["İsraf etmemek için sofrada nelere dikkat edersin?"]}],
+"ahlak-1":[
+ {k:"sort",e:"🙋",h:"Saygılı mı, Saygısız mı?",c:["Saygılı davranış","Saygısız davranış"],i:[["Büyüğüne yer vermek",0],["Konuşanın sözünü kesmek",1],["Selamını almak",0],["Arkadaşıyla alay etmek",1],["Karşısındakini dinlemek",0],["Kötü lakap takmak",1]]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Allah’ın bizi sevdiğini verdiği nimetlerden anlarız.",true],["Sadece büyüklerimize saygı göstermeliyiz.",false],["Kendimize zarar vermemek de bir saygıdır.",true],["Birine kötü lakap takmak hoş bir şakadır.",false]]},
+ {k:"write",e:"☁️",h:"Soru Bulutları",i:["Bir arkadaşında olmasını istediğin üç güzel özellik yaz.","Bu özelliklerden hangileri sende var?"]}],
+"ahlak-2":[
+ {k:"match",e:"🧠",h:"Kime Karşı Sorumluluk?",p:[["Namaz kılmak","Allah’a karşı"],["Odamı toplamak","Aileme karşı"],["Dişlerimi fırçalamak","Kendime karşı"],["Trafik kurallarına uymak","Topluma karşı"],["Ödevimi yapmak","Okuluma karşı"]]},
+ {k:"sort",e:"💡",h:"Tutumlu mu, İsraf mı?",c:["Tutumlu","İsraf"],i:[["Gereksiz lambayı söndürmek",0],["Suyu açık bırakmak",1],["Tabağındaki yemeği bitirmek",0],["Kalemi gereksiz yere açmak",1],["Kıyafetini özenle kullanmak",0],["Yemeği yarım bırakmak",1]]},
+ {k:"write",e:"🍵",h:"Misafir Ağırlıyoruz",i:["Evinize misafir gelecek. Hazırlıkta sen neler yaparsın?","Misafir sen olsaydın nasıl karşılanmak isterdin?"]}],
+"ahlak-3":[
+ {k:"sort",e:"🙏",h:"Özür mü, Teşekkür mü?",c:["Özür dilerim","Teşekkür ederim"],i:[["Koşarken arkadaşına çarptın",0],["Arkadaşın sana kalem verdi",1],["Yanlışlıkla bardağı kırdın",0],["Komşun yemek getirdi",1],["Arkadaşının sözünü kestin",0],["Öğretmenin seni tebrik etti",1]]},
+ {k:"fill",e:"🧼",h:"Temizlik",t:["Allah temizdir, [temiz] olanları sever.","Dişlerimizi günde en az [iki] kez fırçalarız.","Yemekten önce ve sonra [ellerimizi] yıkarız.","Kıyafetin yeni olması değil, [temiz] olması önemlidir."],x:["bir","pahalı"]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["En son kime teşekkür ettin? Ne hissettin?","En son kimden özür diledin? Sonra ne oldu?"]}],
+"ahlak-4":[
+ {k:"sort",e:"🌻",h:"İyilik mi?",c:["İyiliktir","İyilik değildir"],i:[["Yaşlıya yardım etmek",0],["Öğrendiğini paylaşmak",0],["Arkadaşının sırrını yaymak",1],["Hastayı ziyaret etmek",0],["Kırıcı sözler söylemek",1],["Hayvana su vermek",0]]},
+ {k:"tf",e:"✅",h:"Doğru mu, Yanlış mı?",i:[["Allah her iyiliğe en az on sevap verir.",true],["Küçük iyiliklerin hiçbir değeri yoktur.",false],["Susamış köpeğe su veren adamdan Allah hoşnut oldu.",true],["Bize nasıl davranılmasını istiyorsak başkalarına öyle davranırız.",true]]},
+ {k:"write",e:"✍️",h:"Düşün ve Yaz",i:["Bu hafta yaptığın bir iyiliği anlat.","Hasta bir arkadaşını ziyaret ederken nelere dikkat edersin?"]}],
+"ahlak-5":[
+ {k:"sort",e:"✔️",h:"Dürüst mü?",c:["Dürüst davranış","Dürüst olmayan davranış"],i:[["Fazla para üstünü geri vermek",0],["Kırdığı oyuncağı saklamak",1],["Çarptığı çocuktan özür dilemek",0],["Sırada öne geçmek",1],["Hatasını kabul etmek",0],["Başkasının hakkını almak",1]]},
+ {k:"fill",e:"🕯️",h:"Boşlukları Dolduralım",t:["Yalancının mumu [yatsıya] kadar yanar.","Peygamberimiz “Bizi [aldatan] bizden değildir” buyurdu.","Hz. Ebû Bekir “O söylediyse [doğrudur]” derdi.","Bize yapılmasını istemediğimizi [başkasına] yapmayız."],x:["sabaha","yanlıştır"]},
+ {k:"write",e:"✍️",h:"Senin Yerinde Olsaydım",i:["Misafirlikte arkadaşının oyuncağını istemeden kırsaydın ne yapardın?"]}],
+"ahlak-6":[
+ {k:"fill",e:"🤝",h:"Peygamberimizden Öğütler",t:["Kardeşine yardım edene [Allah] da yardım eder.","Komşusu açken [tok] yatan bizden değildir.","Kendin için istediğini [kardeşin] için de iste."],x:["aç","kimse"]},
+ {k:"sort",e:"💞",h:"Paylaşmak mı?",c:["Paylaşmaktır","Paylaşmak değildir"],i:[["Çikolatasını ikiye bölmek",0],["Bayramda komşuyu ziyaret etmek",0],["Hasta arkadaşının yanında olmak",0],["Oyuncağını kimseye vermemek",1],["İhtiyacı olanı görmezden gelmek",1]]},
+ {k:"write",e:"📖",h:"Hikâyeyi Tamamlayalım",i:["Elif, komşusu Mehmet Amca ayağını kırınca bir tabak fazla çorba istedi. Hikâyeyi tamamla ve bir başlık bul."]}],
+"ahlak-7":[
+ {k:"match",e:"🖐️",h:"Beş Şeyin Kıymetini Bil",p:[["Ölümden önce","hayatın"],["Hastalıktan önce","sağlığın"],["Meşguliyetten önce","boş vaktin"],["İhtiyarlıktan önce","gençliğin"],["Yoksulluktan önce","zenginliğin"]]},
+ {k:"sort",e:"⏳",h:"Zamanı Nasıl Kullanıyor?",c:["İyi kullanıyor","Boşa harcıyor"],i:[["Tatilde kitap okumak",0],["Ödevleri ertelemek",1],["Spor yapmak",0],["Bütün gün ekrana bakmak",1],["Kur’an okumayı öğrenmek",0]]},
+ {k:"write",e:"🎯",h:"Hayalim",i:["Büyüyünce ne olmak istiyorsun?","Bu hayale ulaşmak için yapacağın üç adımı yaz."]}]
+};
+
 /* ---------- Kayıt ---------- */
 const KEY="gdo-v1";
 let S={name:"",stars:{}};
@@ -620,6 +868,7 @@ const PATTERN=`<svg class="pattern" width="100%" height="100%" aria-hidden="true
 const LANTERN=(x,h)=>`<svg class="lantern" style="left:${x}px" width="28" height="${h+44}" aria-hidden="true"><line x1="14" y1="0" x2="14" y2="${h}" stroke="#a9e3b6" stroke-width="2"/><path d="M6 ${h+6} Q14 ${h-4} 22 ${h+6} V${h+32} Q14 ${h+40} 6 ${h+32}Z" fill="#3aa65a"/><rect x="10" y="${h+12}" width="8" height="14" rx="4" fill="#fff6c8"/></svg>`;
 const CHEV=c=>`<span class="chev"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" stroke="${c}" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
 const ICON={
+ list:'<path d="M8 6h13M8 12h13M8 18h13" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="3.5" cy="6" r="1.6" fill="currentColor"/><circle cx="3.5" cy="12" r="1.6" fill="currentColor"/><circle cx="3.5" cy="18" r="1.6" fill="currentColor"/>',
  home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="currentColor"/>',
  book:'<path d="M2 5c3-1 6-1 10 1 4-2 7-2 10-1v14c-3-1-6-1-10 1-4-2-7-2-10-1z M12 6v14" fill="none" stroke="currentColor" stroke-width="2"/>',
  chart:'<path d="M5 20V12M10 20V6M15 20V10M20 20V4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
@@ -632,10 +881,10 @@ const starStr=n=>[0,1,2].map(i=>i<n?"⭐":'<span class="off">⭐</span>').join("
 const app=document.getElementById("app");
 let tab="home";
 function renderNav(){
- const items=[["home","Ana Sayfa"],["units","Üniteler"],["prog","İlerlemem"],["prof","Profil"]];
- document.getElementById("nav").innerHTML=items.map(([k,l])=>`<button class="${tab===k?"on":""}" onclick="go('${k}')"><svg width="26" height="26" viewBox="0 0 24 24">${ICON[{home:"home",units:"book",prog:"chart",prof:"user"}[k]]}</svg>${l}</button>`).join("");
+ const items=[["home","Ana Sayfa"],["units","Üniteler"],["book","Kitap"],["prog","İlerlemem"],["prof","Profil"]];
+ document.getElementById("nav").innerHTML=items.map(([k,l])=>`<button class="${tab===k?"on":""}" onclick="go('${k}')"><svg width="26" height="26" viewBox="0 0 24 24">${ICON[{home:"home",units:"list",book:"book",prog:"chart",prof:"user"}[k]]}</svg>${l}</button>`).join("");
 }
-function go(k){tab=k;({home,units:unitsTab,prog,prof})[k]();renderNav();window.scrollTo(0,0)}
+function go(k){if(k==="book"){openBook(0,()=>go(tab));return}tab=k;({home,units:unitsTab,prog,prof})[k]();renderNav();window.scrollTo(0,0)}
 
 function home(){
  const d=doneCount(), n=nextUnit();
@@ -658,12 +907,14 @@ function home(){
  </main>`;
 }
 function continueNext(){const n=nextUnit();if(n)openUnit(n[0],n[1])}
+let listBack=()=>go("home");
 function unitList(ci){
  const c=CATS[ci];
- return c.units.map((u,ui)=>{const s=S.stars[uid(ci,ui)]||0;return `<button class="unit" onclick="openUnit(${ci},${ui})"><span class="num" style="background:var(--${c.c==="b"?"blue":"green"})">${ui+1}</span><span class="t">${esc(u.t)}<small class="pg">📖 Kitap s. ${u.s}</small></span><span class="stars">${starStr(s)}</span></button>`}).join("");
+ return c.units.map((u,ui)=>{const s=S.stars[uid(ci,ui)]||0,[wd,wt]=wbCount(ci,ui);return `<div class="unit"><button class="ub" onclick="openUnit(${ci},${ui})"><span class="num" style="background:var(--${c.c==="b"?"blue":"green"})">${ui+1}</span><span class="t">${esc(u.t)}</span><span class="stars">${starStr(s)}</span></button>
+ <div class="uacts"><button class="chip" onclick="openBook(${parseInt(u.s)},listBack)">📖 Kitap s. ${u.s}</button>${wt?`<button class="chip${wd===wt?" done":""}" onclick="openWB(${ci},${ui},0,listBack)">✏️ Etkinlik ${wd}/${wt}</button>`:""}</div></div>`}).join("");
 }
 function openCat(ci){
- const c=CATS[ci];
+ const c=CATS[ci];listBack=()=>openCat(ci);
  app.innerHTML=`<div class="top ${c.c}"><button class="back" aria-label="Geri" onclick="go('home')">${backIco()}</button><h2>${c.name}</h2>${topExtra()}</div><main><p class="intro">${c.units.length} ünite · Her ünitede ders kartları, bir sohbet sorusu ve ${c.units[0].q.length} test sorusu var.</p><div class="ulist">${unitList(ci)}</div></main>`;
  window.scrollTo(0,0);
 }
@@ -671,6 +922,7 @@ const fsIco=c=>`<svg width="20" height="20" viewBox="0 0 16 16"><path d="M2 6V2h
 const topExtra=()=>clsOn()?`<button class="back fs" aria-label="Tam ekran" title="Tam ekran (F)" onclick="toggleFS()">${fsIco("#fff")}</button>`:"";
 function backIco(){return '<svg width="18" height="18" viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
 function unitsTab(){
+ listBack=()=>go('units');
  app.innerHTML=`<div class="top b"><h2>Üniteler</h2></div><main>${CATS.map((c,i)=>`<h3 style="margin:18px 2px 0;color:var(--${c.c==="b"?"blue-d":"green-d"});font-size:22px">${c.name}</h3><div class="ulist">${unitList(i)}</div>`).join("")}</main>`;
 }
 function prog(){
@@ -735,10 +987,295 @@ function finish(){
  const n=nextUnit();
  const msg=stars===3?"Harika! Hepsini bildin!":stars===2?"Çok güzel!":"Tebrikler, üniteyi bitirdin!";
  app.innerHTML=`<div class="done pop">${teamBar()}<div class="big">${starStr(stars)}</div><h2>${msg}</h2><p>${score} / ${total} doğru cevap</p>
- ${n?`<button class="cta" id="nxu" onclick="continueNext()">Sıradaki ünite</button>`:""}
+ ${(WB[k]||[]).length?`<button class="cta" onclick="openWB(${ci},${ui},0,()=>openCat(${ci}))">✏️ Etkinlik defterine geç</button>`:""}
+ ${n?`<button class="cta blue" id="nxu" onclick="continueNext()">Sıradaki ünite</button>`:""}
  <button class="cta blue" onclick="openUnit(${ci},${ui})">Tekrar dene</button>
  <button class="ghost" onclick="go('home')">Ana sayfaya dön</button></div>`;
 }
+
+/* ---------- Yerel depo (IndexedDB): kitap PDF’i ve sayfa notları sadece bu cihazda ---------- */
+const IDB={p:null,
+ open(){return this.p||(this.p=new Promise((res,rej)=>{try{const r=indexedDB.open("gdo",1);r.onupgradeneeded=()=>r.result.createObjectStore("kv");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}}))},
+ async op(mode,fn){const db=await this.open();return new Promise((res,rej)=>{const tx=db.transaction("kv",mode),q=fn(tx.objectStore("kv"));tx.oncomplete=()=>res(q&&q.result);tx.onerror=()=>rej(tx.error)})},
+ get(k){return this.op("readonly",s=>s.get(k)).catch(()=>undefined)},
+ set(k,v){return this.op("readwrite",s=>s.put(v,k)).catch(()=>{})},
+ del(k){return this.op("readwrite",s=>s.delete(k)).catch(()=>{})}
+};
+
+/* ---------- Tam ekran katman (kitap okuyucu + etkinlik defteri) ---------- */
+let OV=null; // {kind:"wb"|"book", back:fn}
+function ovEl(){let o=document.getElementById("ov");if(!o){o=document.createElement("div");o.id="ov";document.body.append(o)}return o}
+function openOv(kind,html,back){OV={kind,back};const o=ovEl();o.className="ov "+kind;o.innerHTML=html;document.documentElement.classList.add("ovon")}
+function closeOv(){const b=OV&&OV.back;OV=null;W=null;const o=document.getElementById("ov");if(o){o.innerHTML="";o.className=""}document.documentElement.classList.remove("ovon");(b||(()=>go(tab)))()}
+const reduceMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Sayfa çevirme: tek sayfa (etkinlik defteri ve dar ekranda kitap) */
+function curlTo(stage,nu,dir,done){
+ const old=stage.querySelector(".leafpage.cur");
+ nu.classList.add("leafpage","cur");
+ if(!old||reduceMotion()||!dir){stage.innerHTML="";stage.append(nu);done&&done();return}
+ old.classList.remove("cur");
+ if(dir>0){stage.insertBefore(nu,old);old.classList.add("turnOut");old.addEventListener("animationend",()=>{old.remove();done&&done()},{once:true})}
+ else{stage.append(nu);nu.classList.add("turnIn");nu.addEventListener("animationend",()=>{nu.classList.remove("turnIn");old.remove();done&&done()},{once:true})}
+}
+function swipe(el,fn){let x0=null,y0=0;el.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;x0=e.clientX;y0=e.clientY});el.addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0,dy=e.clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)fn(dx<0?1:-1)})}
+
+/* ---------- Etkinlik defteri ---------- */
+let W=null; // {ci,ui,list,idx,st:{}}
+const wbKey=(ci,ui,i)=>uid(ci,ui)+"-"+i;
+function wbCount(ci,ui){const L=WB[uid(ci,ui)]||[];S.wb=S.wb||{};return [L.filter((_,i)=>S.wb[wbKey(ci,ui,i)]).length,L.length]}
+function seeded(str){let h=1779033703;for(const ch of str)h=Math.imul(h^ch.codePointAt(0),3432918353)>>>0;return()=>{h+=0x6D2B79F5;let t=h;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+function shuffled(a,rnd){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function shuffleNotSame(a,rnd){if(a.length<2)return a.slice();let b;do b=shuffled(a,rnd);while(b.every((v,i)=>v===a[i]));return b}
+function openWB(ci,ui,i=0,back){
+ const c=CATS[ci],u=c.units[ui];
+ W={ci,ui,list:WB[uid(ci,ui)]||[],idx:i,st:{}};
+ openOv("wb",`<div class="ovbar ${c.c}"><button class="back" aria-label="Kapat" onclick="closeOv()">${backIco()}</button><h2><small>✏️ Etkinlik Defteri · Ünite ${ui+1}</small>${esc(u.t)}</h2><button class="back" aria-label="Tam ekran" title="Tam ekran (F)" onclick="toggleFS()">${fsIco("#fff")}</button></div>
+ <div class="ovstage"><button class="side" aria-label="Önceki sayfa" onclick="wbGo(-1)">‹</button><div class="wbook" id="wbook"></div><button class="side" aria-label="Sonraki sayfa" onclick="wbGo(1)">›</button></div>`,back||(()=>openCat(ci)));
+ const bk=document.getElementById("wbook");swipe(bk,d=>wbGo(d));
+ bk.addEventListener("click",wbClick);bk.addEventListener("input",wbInput);
+ wbShow(0);
+}
+function wbGo(d){if(!W)return;const n=W.list.length;const t=W.idx+d;if(t<0||t>n)return;W.idx=t;wbShow(d)}
+function wbShow(dir){const el=document.createElement("div");el.className="wpage";el.dataset.i=W.idx;el.innerHTML=wbInner(W.idx);curlTo(document.getElementById("wbook"),el,dir)}
+function wbRefresh(){const el=document.querySelector("#wbook .wpage.cur");if(el)el.innerHTML=wbInner(W.idx)}
+function wbState(i){
+ if(W.st[i])return W.st[i];const X=W.list[i],rnd=seeded(wbKey(W.ci,W.ui,i));let s={};
+ if(X.k==="fill"){const ans=[];X.t.forEach(t=>t.replace(/\[([^\]]+)\]/g,(_,a)=>ans.push(a)));s={ans,bank:shuffled(ans.concat(X.x||[]),rnd),fill:ans.map(()=>null),sel:0}}
+ else if(X.k==="match")s={ro:shuffleNotSame(X.p.map((_,j)=>j),rnd),pair:{},sel:null};
+ else if(X.k==="order")s={pool:shuffleNotSame(X.i.map((_,j)=>j),rnd),ans:[]};
+ else if(X.k==="sort")s={ord:shuffled(X.i.map((_,j)=>j),rnd),place:{},sel:null};
+ else if(X.k==="tf")s={v:{}};
+ else if(X.k==="ws")s=Object.assign(makeWS(X.w,X.n,rnd),{found:[],cells:{},a:null});
+ return W.st[i]=s;
+}
+const TYPE_INFO={fill:"Kelimeye, sonra boşluğa dokun.",match:"Soldan birini, sonra sağdan eşini seç.",order:"Doğru sırayla dokun. Yanlış seçtiğine tekrar dokunursan geri gider.",sort:"Bir karta dokun, sonra doğru kutuya dokun.",tf:"Her cümle için Doğru ya da Yanlış seç.",ws:"Kelimenin ilk harfine, sonra son harfine dokun.",write:"Cevaplarını yaz; otomatik kaydedilir."};
+function wbInner(i){
+ const n=W.list.length,c=CATS[W.ci];
+ if(i>=n){const [d,t]=wbCount(W.ci,W.ui);const nx=nextIdx(W.ci,W.ui);
+  return `<div class="wend"><div class="big">${d===t?"🏆":"📒"}</div><h3>${d===t?"Bütün etkinlikleri tamamladın!":"Etkinlik defterinin sonu"}</h3><p>${d} / ${t} etkinlik tamamlandı</p>
+  <div class="row"><button class="cta blue" data-a="first">Başa dön</button>${nx?`<button class="cta" data-a="nextunit">Sıradaki ünite ›</button>`:""}</div>
+  <p class="wpn">${i+1}</p></div>`}
+ const X=W.list[i],s=wbState(i),done=S.wb&&S.wb[wbKey(W.ci,W.ui,i)];
+ return `<div class="wph"><span class="wtag ${c.c}">Etkinlik ${i+1} / ${n}</span>${done?`<span class="wok">✓ Tamamlandı</span>`:""}</div>
+ <h3><span class="we">${X.e}</span>${esc(X.h)}</h3><p class="winst">${TYPE_INFO[X.k]}</p>
+ <div class="wbody k-${X.k}">${WB_R[X.k](X,s)}</div>
+ <div class="wfoot"><span class="wfb ${s.res||""}">${s.msg||""}</span>${X.k!=="write"&&X.k!=="ws"?`<button class="wbtn ghostb" data-a="reset">↺ Sıfırla</button><button class="wbtn" data-a="check">Kontrol et ✓</button>`:""}<span class="wpn">${i+1}</span></div>`;
+}
+const mk=(s,cls)=>s.checked?(cls?" ok":" no"):"";
+const WB_R={
+ fill(X,s){let b=0;const lines=X.t.map(t=>esc(t).replace(/\[([^\]]+)\]/g,()=>{const j=b++,f=s.fill[j];return `<button class="blank${s.sel===j?" sel":""}${f!==null?" full":""}${s.checked?(f!==null&&s.bank[f]===s.ans[j]?" ok":" no"):""}" data-b="${j}">${f!==null?esc(s.bank[f]):"……"}</button>`}));
+  const used=new Set(s.fill.filter(v=>v!==null));
+  return `<ol class="lines">${lines.map(l=>`<li>${l}</li>`).join("")}</ol><div class="bank">${s.bank.map((w,j)=>`<button class="chipw${used.has(j)?" used":""}" data-w="${j}" ${used.has(j)?"disabled":""}>${esc(w)}</button>`).join("")}</div>`},
+ match(X,s){const colors=["#f5b82e","#5b92ee","#3aa65a","#e25b4f","#a46ae0","#18a3a3"];const rp={};for(const l in s.pair)rp[s.pair[l]]=+l;
+  const L=X.p.map((p,j)=>{const r=s.pair[j];const col=r!==undefined?colors[j%6]:"";return `<button class="mi${s.sel===j?" sel":""}${s.checked&&r!==undefined?(r===j?" ok":" no"):""}" data-l="${j}" style="${col?`--mc:${col}`:""}"><span class="dot"></span>${esc(p[0])}</button>`}).join("");
+  const R=s.ro.map(j=>{const l=rp[j];const col=l!==undefined?colors[l%6]:"";return `<button class="mi r${s.checked&&l!==undefined?(l===j?" ok":" no"):""}" data-r="${j}" style="${col?`--mc:${col}`:""}"><span class="dot"></span>${esc(X.p[j][1])}</button>`}).join("");
+  return `<div class="mcols"><div>${L}</div><div>${R}</div></div>`},
+ order(X,s){return `<div class="oans${X.i.length>6?" two":""}">${X.i.map((_,k)=>{const j=s.ans[k];return j===undefined?`<div class="oslot"><b>${k+1}</b><span>……</span></div>`:`<button class="oslot full${s.checked?(j===k?" ok":" no"):""}" data-o="${k}"><b>${k+1}</b><span>${esc(X.i[j])}</span></button>`}).join("")}</div>
+  <div class="bank">${s.pool.map(j=>s.ans.includes(j)?"":`<button class="chipw" data-p="${j}">${esc(X.i[j])}</button>`).join("")}</div>`},
+ sort(X,s){const pool=s.ord.filter(j=>s.place[j]===undefined);
+  return `<div class="bank">${pool.length?pool.map(j=>`<button class="chipw${s.sel===j?" sel":""}" data-s="${j}">${esc(X.i[j][0])}</button>`).join(""):`<span class="muted">Bütün kartlar yerleştirildi 👍</span>`}</div>
+  <div class="bins">${X.c.map((cn,k)=>`<div class="bin${s.sel!==null?" hot":""}" data-c="${k}"><h4>${esc(cn)}</h4>${s.ord.filter(j=>s.place[j]===k).map(j=>`<button class="chipw in${s.checked?(X.i[j][1]===k?" ok":" no"):""}" data-u="${j}">${esc(X.i[j][0])}</button>`).join("")}</div>`).join("")}</div>`},
+ tf(X,s){return `<div class="tfl">${X.i.map(([t,a],j)=>{const v=s.v[j];return `<div class="tfi${s.checked&&v!==undefined?(v===a?" ok":" no"):""}"><span>${esc(t)}</span><div class="tfb"><button class="${v===true?"on":""}" data-t="${j}" data-v="1">Doğru</button><button class="${v===false?"on":""}" data-t="${j}" data-v="0">Yanlış</button></div></div>`}).join("")}</div>`},
+ ws(X,s){const n=s.g.length;return `<div class="wsw"><div class="wsg" style="--n:${n}">${s.g.map((row,r)=>row.map((ch,c)=>`<button class="wc${s.cells[r+","+c]?" f":""}${s.a&&s.a[0]===r&&s.a[1]===c?" a":""}" data-rc="${r},${c}">${ch}</button>`).join("")).join("")}</div>
+  <ul class="wsl">${X.w.map(w=>`<li class="${s.found.includes(w)?"f":""}">${s.found.includes(w)?"✓ ":""}${w}</li>`).join("")}</ul></div>`},
+ write(X){const key=wbKey(W.ci,W.ui,W.idx);const v=(S.wbt&&S.wbt[key])||[];return X.i.map((q,j)=>`<label class="wq"><span>${esc(q)}</span><textarea data-q="${j}" rows="3" placeholder="Buraya yaz…">${esc(v[j]||"")}</textarea></label>`).join("")}
+};
+function makeWS(words,n,rnd){
+ const AL=[..."ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ"],D=[[0,1],[1,0],[1,1]];
+ for(let at=0;at<300;at++){const g=Array.from({length:n},()=>Array(n).fill(""));let ok=true;
+  for(const w of [...words].sort((a,b)=>b.length-a.length)){const L=[...w];let put=false;
+   for(let t=0;t<300&&!put;t++){const d=D[Math.floor(rnd()*3)];if(L.length>n)break;const r=Math.floor(rnd()*(n-(d[0]?L.length-1:0))),c=Math.floor(rnd()*(n-(d[1]?L.length-1:0)));
+    if(L.every((ch,k)=>{const x=g[r+d[0]*k][c+d[1]*k];return!x||x===ch})){L.forEach((ch,k)=>g[r+d[0]*k][c+d[1]*k]=ch);put=true}}
+   if(!put){ok=false;break}}
+  if(ok){for(const row of g)for(let c=0;c<n;c++)if(!row[c])row[c]=AL[Math.floor(rnd()*AL.length)];return{g}}}
+ return{g:[[..."HATA"]]};
+}
+function wbMark(i,ok){S.wb=S.wb||{};if(ok){S.wb[wbKey(W.ci,W.ui,i)]=1;save()}}
+function wbClick(e){
+ const b=e.target.closest("button");if(!b||!W)return;const i=W.idx,X=W.list[i],a=b.dataset.a;
+ if(a==="first"){W.idx=0;wbShow(-1);return}
+ if(a==="nextunit"){const nx=nextIdx(W.ci,W.ui);if(nx)openWB(nx[0],nx[1],0,OV&&OV.back);return}
+ if(!X)return;const s=wbState(i);
+ if(a==="reset"){delete W.st[i];wbRefresh();return}
+ if(a==="check"){const r=WB_CHECK[X.k](X,s);s.checked=true;s.res=r.ok?"ok":"no";s.msg=r.ok?"Harika! Hepsi doğru 🌟":r.msg||"Kırmızı olanları tekrar dene 💪";wbMark(i,r.ok);wbRefresh();return}
+ s.checked=false;s.msg="";s.res="";const d=b.dataset;
+ if(X.k==="fill"){
+  if(d.b!==undefined){const j=+d.b;if(s.fill[j]!==null){s.fill[j]=null}s.sel=j}
+  else if(d.w!==undefined){let j=s.sel;if(j===null||s.fill[j]!==null)j=s.fill.indexOf(null);if(j>=0){s.fill[j]=+d.w;const nx=s.fill.indexOf(null);s.sel=nx>=0?nx:null}}
+ }else if(X.k==="match"){
+  if(d.l!==undefined){const l=+d.l;if(s.pair[l]!==undefined)delete s.pair[l];s.sel=l}
+  else if(d.r!==undefined){const r=+d.r;for(const l in s.pair)if(s.pair[l]===r)delete s.pair[l];if(s.sel!==null){s.pair[s.sel]=r;const free=X.p.findIndex((_,j)=>s.pair[j]===undefined);s.sel=free>=0?free:null}}
+ }else if(X.k==="order"){
+  if(d.p!==undefined)s.ans.push(+d.p);else if(d.o!==undefined)s.ans.splice(+d.o);
+ }else if(X.k==="sort"){
+  if(d.s!==undefined)s.sel=+d.s;else if(d.u!==undefined){delete s.place[+d.u]}
+ }else if(X.k==="tf"){s.v[+d.t]=d.v==="1"}
+ else if(X.k==="ws"){const [r,c]=d.rc.split(",").map(Number);
+  if(!s.a)s.a=[r,c];else{const [r0,c0]=s.a;s.a=null;const dr=Math.sign(r-r0),dc=Math.sign(c-c0),len=Math.max(Math.abs(r-r0),Math.abs(c-c0))+1;
+   if((r-r0===0||c-c0===0||Math.abs(r-r0)===Math.abs(c-c0))&&len>1){const cells=[];for(let k=0;k<len;k++)cells.push([r0+dr*k,c0+dc*k]);const word=cells.map(([y,x])=>s.g[y][x]).join("");
+    const hit=X.w.find(w=>!s.found.includes(w)&&(w===word||w===[...word].reverse().join("")));
+    if(hit){s.found.push(hit);cells.forEach(([y,x])=>s.cells[y+","+x]=1);if(s.found.length===X.w.length){s.res="ok";s.msg="Hepsini buldun! 🌟";wbMark(i,true)}else{s.msg=`${s.found.length} / ${X.w.length} kelime bulundu`}}
+    else s.msg="Bu bir kelime değil, tekrar dene";}}
+ }
+ wbRefresh();
+}
+document.addEventListener("click",e=>{const bin=e.target.closest(".bin");if(!bin||!W||e.target.closest("button"))return;const X=W.list[W.idx],s=wbState(W.idx);if(X.k!=="sort"||s.sel===null)return;s.place[s.sel]=+bin.dataset.c;s.checked=false;s.msg="";s.res="";const left=s.ord.filter(j=>s.place[j]===undefined);s.sel=left.length?left[0]:null;wbRefresh()});
+function wbInput(e){const t=e.target;if(!W||t.tagName!=="TEXTAREA")return;const key=wbKey(W.ci,W.ui,W.idx);S.wbt=S.wbt||{};const v=S.wbt[key]||[];v[+t.dataset.q]=t.value;S.wbt[key]=v;
+ const X=W.list[W.idx];const full=X.i.every((_,j)=>(v[j]||"").trim().length>1);S.wb=S.wb||{};if(full)S.wb[key]=1;else delete S.wb[key];
+ clearTimeout(wbInput.t);wbInput.t=setTimeout(save,400)}
+const WB_CHECK={
+ fill:(X,s)=>({ok:s.fill.every((f,j)=>f!==null&&s.bank[f]===s.ans[j]),msg:s.fill.includes(null)?"Önce bütün boşlukları doldur":""}),
+ match:(X,s)=>({ok:X.p.every((_,j)=>s.pair[j]===j),msg:Object.keys(s.pair).length<X.p.length?"Önce hepsini eşleştir":""}),
+ order:(X,s)=>({ok:s.ans.length===X.i.length&&s.ans.every((j,k)=>j===k),msg:s.ans.length<X.i.length?"Önce hepsini sırala":""}),
+ sort:(X,s)=>({ok:X.i.every((it,j)=>s.place[j]===it[1]),msg:Object.keys(s.place).length<X.i.length?"Önce bütün kartları yerleştir":""}),
+ tf:(X,s)=>({ok:X.i.every((it,j)=>s.v[j]===it[1]),msg:Object.keys(s.v).length<X.i.length?"Önce hepsini işaretle":""})
+};
+function nextIdx(ci,ui){if(ui+1<CATS[ci].units.length)return[ci,ui+1];if(ci+1<CATS.length)return[ci+1,0];return null}
+
+/* ---------- Kitap okuyucu (öğretmenin kendi PDF’i, sadece bu cihazda) ---------- */
+const PDFJS="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/";
+let pdfjsP=null;
+function loadPdfjs(){return pdfjsP||(pdfjsP=new Promise((res,rej)=>{const s=document.createElement("script");s.src=PDFJS+"pdf.min.js";s.onload=()=>{window.pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS+"pdf.worker.min.js";res(window.pdfjsLib)};s.onerror=()=>{pdfjsP=null;rej(new Error("pdf.js yüklenemedi"))};document.head.append(s)}))}
+const R={pages:null,pos:1,tool:"hand",color:"#e25b4f",ann:{},cache:new Map(),busy:false,mode:"single",pw:0,ph:0,files:null};
+const PENS=["#e25b4f","#2f6fd6","#2a7f43","#183a73"];
+async function openBook(page,back){
+ if(page)R.pos=Math.max(1,page|0);else if(S.bpos&&!R.pages)R.pos=S.bpos;
+ openOv("book",`<div class="ovbar b rbar"><button class="back" aria-label="Kapat" onclick="closeOv()">${backIco()}</button><h2><small>📖 Kitap</small>Etkinliklerle Dinimi Öğreniyorum</h2>
+  <div class="rnav"><button class="rb" aria-label="Önceki sayfa" onclick="rdGo(-1)">‹</button><label class="rpg"><span>s.</span><input id="rpg" type="number" min="1" inputmode="numeric" aria-label="Sayfa numarası"></label><span id="rtot" class="rtot"></span><button class="rb" aria-label="Sonraki sayfa" onclick="rdGo(1)">›</button></div>
+  <div class="rtools" id="rtools"></div><button class="back" aria-label="Tam ekran" title="Tam ekran (F)" onclick="toggleFS()">${fsIco("#fff")}</button></div>
+  <div class="ovstage rstage" id="rstage"><div class="rbook" id="rbook"></div></div>`,back||(OV&&OV.kind==="book"?OV.back:null));
+ document.getElementById("rpg").addEventListener("change",e=>rdJump(+e.target.value));
+ swipe(document.getElementById("rstage"),d=>{if(R.tool==="hand")rdGo(d)});
+ rdTools();
+ if(!R.pages){const f=await IDB.get("pdf");if(f&&f.length){rdMsg("Kitap açılıyor…");try{await rdLoad(f)}catch(e){rdSetup("Kayıtlı kitap açılamadı: "+e.message)}}else rdSetup()}
+ if(R.pages)rdRender(0);
+}
+function rdMsg(t){const s=document.getElementById("rstage");if(s)s.innerHTML=`<div class="rsetup"><div class="spin"></div><p>${esc(t)}</p></div>`}
+function rdSetup(err){
+ const s=document.getElementById("rstage");if(!s)return;
+ s.innerHTML=`<div class="rsetup"><div class="big">📖</div><h3>Kitabını aç</h3>
+ <p>“Etkinliklerle Dinimi Öğreniyorum” kitabının PDF dosyasını seç. Kitap birkaç parça hâlindeyse (ör. 001-100, 101-200, 201-224) hepsini birlikte seçebilirsin.</p>
+ <label class="cta"><input type="file" accept="application/pdf,.pdf" multiple hidden onchange="rdPick(this.files)">📂 PDF dosyasını seç</label>
+ <p class="note">🔒 Dosya sadece bu cihazda saklanır; internete yüklenmez. Kitap © Diyanet İşleri Başkanlığı.</p>${err?`<p class="err">${esc(err)}</p>`:""}</div>`;
+}
+async function rdPick(fl){
+ const files=[...fl].filter(f=>/\.pdf$/i.test(f.name)||f.type==="application/pdf").sort((a,b)=>a.name.localeCompare(b.name,"tr",{numeric:true}));
+ if(!files.length)return;rdMsg("Kitap hazırlanıyor…");
+ try{const arr=await Promise.all(files.map(async f=>({name:f.name,buf:await f.arrayBuffer()})));await rdLoad(arr);IDB.set("pdf",arr);rdRender(0)}
+ catch(e){rdSetup("PDF açılamadı: "+e.message)}
+}
+async function rdLoad(arr){
+ const lib=await loadPdfjs();const pages=[];R.files=arr;
+ for(const f of arr){const doc=await lib.getDocument({data:new Uint8Array(f.buf.slice(0))}).promise;for(let k=1;k<=doc.numPages;k++)pages.push({doc,k})}
+ R.pages=pages;R.cache.clear();const p=await pages[0].doc.getPage(pages[0].k);const v=p.getViewport({scale:1});R.ar=v.width/v.height;
+ R.pos=Math.min(Math.max(1,R.pos),pages.length);
+}
+function rdTools(){
+ const t=document.getElementById("rtools");if(!t)return;
+ const T=[["hand","👆","Gezin / çevir"],["pen","✏️","Kalem"],["mark","🖍️","Fosforlu kalem"],["text","T","Yazı ekle"],["erase","🧽","Silgi"]];
+ t.innerHTML=T.map(([k,ic,l])=>`<button class="rt${R.tool===k?" on":""}" title="${l}" aria-label="${l}" aria-pressed="${R.tool===k}" onclick="rdTool('${k}')">${ic}</button>`).join("")
+  +`<span class="rsep"></span>`+PENS.map(c=>`<button class="rc${R.color===c?" on":""}" style="--c:${c}" aria-label="Renk" onclick="R.color='${c}';rdTools()"></button>`).join("")
+  +`<span class="rsep"></span><button class="rt" title="Geri al" aria-label="Geri al" onclick="rdUndo()">↩️</button><button class="rt" title="Bu sayfadaki notları sil" aria-label="Notları sil" onclick="rdClear()">🗑️</button><button class="rt" title="Ayarlar" aria-label="Ayarlar" onclick="rdSettings()">⚙️</button>`;
+ document.documentElement.dataset.rtool=R.tool;
+}
+function rdTool(k){R.tool=k;rdTools()}
+function rdSpread(){const s=document.getElementById("rstage");return s&&s.clientWidth>=900&&s.clientWidth>s.clientHeight*1.15}
+function rdVisible(p){if(R.mode==="spread"){const L=p%2===0?p:p-1;return[L,L+1]}return[p]}
+function rdSize(){
+ const s=document.getElementById("rstage");const W0=s.clientWidth-24,H0=s.clientHeight-20;
+ R.mode=rdSpread()?"spread":"single";const cols=R.mode==="spread"?2:1;
+ let h=H0,w=h*R.ar;if(w*cols>W0){w=W0/cols;h=w/R.ar}R.pw=Math.floor(w);R.ph=Math.floor(h);
+}
+async function rdCanvas(n){
+ const key=n+":"+R.pw;if(R.cache.has(key))return R.cache.get(key);
+ const pr=(async()=>{const P=R.pages[n-1];const page=await P.doc.getPage(P.k);const dpr=Math.min(window.devicePixelRatio||1,2);const v0=page.getViewport({scale:1});const v=page.getViewport({scale:R.pw*dpr/v0.width});
+  const cv=document.createElement("canvas");cv.width=Math.round(v.width);cv.height=Math.round(v.height);await page.render({canvasContext:cv.getContext("2d"),viewport:v}).promise;return cv})();
+ R.cache.set(key,pr);if(R.cache.size>14)R.cache.delete(R.cache.keys().next().value);return pr;
+}
+async function rdAnnFor(n){if(!R.ann[n])R.ann[n]=(await IDB.get("ann:"+n))||[];return R.ann[n]}
+function rdPageEl(n){
+ const d=document.createElement("div");d.className="ppage";d.style.width=R.pw+"px";d.style.height=R.ph+"px";
+ if(!n||n>R.pages.length){d.classList.add("blank");return d}
+ d.dataset.n=n;d.innerHTML=`<canvas class="pc"></canvas><canvas class="ac"></canvas><span class="pno">${n}</span>`;
+ const dpr=Math.min(window.devicePixelRatio||1,2);for(const c of d.querySelectorAll("canvas")){c.width=Math.round(R.pw*dpr);c.height=Math.round(R.ph*dpr)}
+ rdCanvas(n).then(src=>{const c=d.querySelector(".pc");c.getContext("2d").drawImage(src,0,0,c.width,c.height)});
+ rdAnnFor(n).then(items=>drawAnn(d.querySelector(".ac"),items));
+ rdBindDraw(d,n);return d;
+}
+function rdSpreadEl(p){const el=document.createElement("div");el.className="spread";for(const n of rdVisible(p))el.append(rdPageEl(n));return el}
+function rdRender(dir){
+ const st=document.getElementById("rstage");if(!st||!R.pages)return;let bk=document.getElementById("rbook");if(!bk){st.innerHTML='<div class="rbook" id="rbook"></div>';bk=document.getElementById("rbook")}rdSize();
+ if(R.mode==="spread"&&R.pos%2===1&&R.pos>1)R.pos--; // çift sayfa solda
+ const tot=document.getElementById("rtot");if(tot)tot.textContent="/ "+R.pages.length;
+ const inp=document.getElementById("rpg");if(inp)inp.value=R.pos;if(S.bpos!==R.pos){S.bpos=R.pos;save()}
+ if(R.mode==="spread"){bk.style.width=R.pw*2+"px";bk.style.height=R.ph+"px";bk.innerHTML="";bk.append(rdSpreadEl(R.pos))}
+ else{bk.style.width=R.pw+"px";bk.style.height=R.ph+"px";const el=document.createElement("div");el.className="sp1";el.append(rdPageEl(R.pos));curlTo(bk,el,dir)}
+ [R.pos-2,R.pos-1,R.pos+2,R.pos+3].forEach(n=>{if(n>=1&&n<=R.pages.length)rdCanvas(n)});
+}
+async function rdGo(d){
+ if(!R.pages||R.busy)return;const step=R.mode==="spread"?2:1;const vis=rdVisible(R.pos);
+ if(d<0&&vis[0]<=(R.mode==="spread"?0:1))return;if(d>0&&vis[vis.length-1]>=R.pages.length)return;
+ const t=R.pos+d*step;
+ if(R.mode!=="spread"||reduceMotion()){R.pos=Math.max(1,t);rdRender(d);return}
+ // Çift sayfa: sağ sayfa sola doğru döner (ileri) / sol sayfa sağa döner (geri)
+ const bk=document.getElementById("rbook"),sp=bk.querySelector(".spread");if(!sp){R.pos=Math.max(1,t);rdRender(d);return}
+ R.busy=true;const [L,Rt]=rdVisible(R.pos);const nL=d>0?L+2:L-2;
+ const front=d>0?Rt:L, back=d>0?nL:nL+1;
+ const under=d>0?nL+1:nL; // altta görünecek sayfa
+ const slots=sp.children;const keep=d>0?0:1;
+ const leaf=document.createElement("div");leaf.className="leaf "+(d>0?"fwd":"bwd");leaf.style.width=R.pw+"px";leaf.style.height=R.ph+"px";
+ const f=rdPageEl(front),b=rdPageEl(back);f.classList.add("face","front");b.classList.add("face","back");leaf.append(f,b);
+ await Promise.all([front,back,under].filter(n=>n>=1&&n<=R.pages.length).map(n=>rdCanvas(n)));
+ const und=rdPageEl(under);sp.replaceChild(und,slots[1-keep]);
+ sp.append(leaf);requestAnimationFrame(()=>leaf.classList.add("go"));
+ leaf.addEventListener("transitionend",()=>{R.pos=Math.max(1,t);R.busy=false;if(S.bpos!==R.pos){S.bpos=R.pos;save()}bk.innerHTML="";bk.append(rdSpreadEl(R.pos));const inp=document.getElementById("rpg");if(inp)inp.value=R.pos},{once:true});
+ setTimeout(()=>{if(R.busy){R.busy=false;R.pos=Math.max(1,t);rdRender(0)}},1500);
+}
+function rdJump(p){if(!R.pages)return;R.pos=Math.min(Math.max(1,p|0),R.pages.length);rdRender(0)}
+/* Notlar: kalem, fosforlu kalem, yazı, silgi — koordinatlar sayfaya göre (0–1) saklanır */
+function drawAnn(cv,items){
+ const x=cv.getContext("2d"),Wd=cv.width,H=cv.height;x.clearRect(0,0,Wd,H);
+ for(const it of items){x.save();
+  if(it.k==="t"){x.fillStyle=it.c;x.font=`700 ${it.fs*Wd}px "Baloo 2",system-ui,sans-serif`;x.textBaseline="top";it.s.split("\n").forEach((ln,i)=>x.fillText(ln,it.x*Wd,it.y*H+i*it.fs*Wd*1.15))}
+  else{x.globalCompositeOperation=it.k==="m"?"multiply":"source-over";x.globalAlpha=it.k==="m"?.45:1;x.strokeStyle=it.c;x.lineWidth=it.w*Wd;x.lineCap=x.lineJoin="round";x.beginPath();const p=it.pts;x.moveTo(p[0]*Wd,p[1]*H);for(let i=2;i<p.length;i+=2)x.lineTo(p[i]*Wd,p[i+1]*H);if(p.length===2)x.lineTo(p[0]*Wd+.5,p[1]*H);x.stroke()}
+  x.restore()}
+}
+function rdSaveAnn(n){clearTimeout(rdSaveAnn["t"+n]);rdSaveAnn["t"+n]=setTimeout(()=>IDB.set("ann:"+n,R.ann[n]),300)}
+function rdBindDraw(d,n){
+ const cv=d.querySelector(".ac");let cur=null;
+ const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]};
+ cv.addEventListener("pointerdown",async e=>{
+  if(R.tool==="hand")return;e.preventDefault();const items=await rdAnnFor(n);const [x,y]=pt(e);
+  if(R.tool==="text"){rdTextAt(d,n,x,y);return}
+  cv.setPointerCapture(e.pointerId);
+  if(R.tool==="erase"){cur={erase:true};rdErase(items,x,y,cv,n);return}
+  cur={k:R.tool==="mark"?"m":"p",c:R.tool==="mark"?"#ffd84d":R.color,w:R.tool==="mark"?.028:.0045,pts:[x,y]};items.push(cur);drawAnn(cv,items);
+ });
+ cv.addEventListener("pointermove",e=>{if(!cur)return;const [x,y]=pt(e);const items=R.ann[n];if(cur.erase){rdErase(items,x,y,cv,n);return}cur.pts.push(+x.toFixed(4),+y.toFixed(4));drawAnn(cv,items)});
+ const end=()=>{if(cur){cur=null;rdSaveAnn(n)}};cv.addEventListener("pointerup",end);cv.addEventListener("pointercancel",end);
+}
+function rdErase(items,x,y,cv,n){const r=.02;let ch=false;for(let i=items.length-1;i>=0;i--){const it=items[i];let hit=false;
+ if(it.k==="t")hit=x>=it.x-.01&&y>=it.y-.01&&x<=it.x+it.fs*it.s.length*.55&&y<=it.y+it.fs*1.4*(it.s.split("\n").length);
+ else for(let k=0;k<it.pts.length;k+=2)if(Math.hypot(it.pts[k]-x,(it.pts[k+1]-y)/R.ar)<r){hit=true;break}
+ if(hit){items.splice(i,1);ch=true}}if(ch)drawAnn(cv,items)}
+function rdTextAt(d,n,x,y){
+ const ta=document.createElement("textarea");ta.className="rtext";ta.style.left=x*100+"%";ta.style.top=y*100+"%";ta.style.color=R.color;ta.style.fontSize=Math.round(R.pw*.03)+"px";d.append(ta);ta.focus();setTimeout(()=>ta.focus(),0);
+ const commit=()=>{const s=ta.value.trim();ta.remove();if(s){R.ann[n].push({k:"t",c:R.color,x,y,s,fs:.03});drawAnn(d.querySelector(".ac"),R.ann[n]);rdSaveAnn(n)}};
+ ta.addEventListener("blur",commit);ta.addEventListener("keydown",e=>{if(e.key==="Escape"){ta.value="";ta.blur()}if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();ta.blur()}});
+}
+function rdRedrawAnn(){document.querySelectorAll("#rbook .ppage[data-n]").forEach(d=>{const n=+d.dataset.n;if(R.ann[n])drawAnn(d.querySelector(".ac"),R.ann[n])})}
+function rdUndo(){for(const n of rdVisible(R.pos).reverse()){const a=R.ann[n];if(a&&a.length){a.pop();rdSaveAnn(n);rdRedrawAnn();return}}}
+function rdClear(){const ns=rdVisible(R.pos).filter(n=>R.ann[n]&&R.ann[n].length);if(!ns.length)return;if(!confirm("Görünen sayfalardaki bütün notlar silinsin mi?"))return;ns.forEach(n=>{R.ann[n]=[];rdSaveAnn(n)});rdRedrawAnn()}
+function rdSettings(){
+ const s=document.getElementById("rstage");const old=s.querySelector(".rset");if(old){old.remove();return}
+ s.insertAdjacentHTML("beforeend",`<div class="rset"><h4>⚙️ Kitap ayarları</h4>
+ <label class="ghost"><input type="file" accept="application/pdf,.pdf" multiple hidden onchange="rdPick(this.files)">📂 Başka PDF seç</label>
+ <button class="ghost" onclick="rdForget()">🗑️ Kitabı bu cihazdan kaldır</button>
+ <p class="note">Notların sayfa numarasına göre bu cihazda saklanır.</p><button class="cta blue" onclick="this.closest('.rset').remove()">Kapat</button></div>`);
+}
+async function rdForget(){if(!confirm("Kitap dosyası bu cihazdan silinsin mi? (Notlar kalır)"))return;await IDB.del("pdf");R.pages=null;R.cache.clear();rdSetup()}
+window.addEventListener("resize",()=>{clearTimeout(rdRender.t);rdRender.t=setTimeout(()=>{if(OV&&OV.kind==="book"&&R.pages){R.cache.clear();rdRender(0)}else if(OV&&OV.kind==="wb")wbRefresh()},200)});
 
 /* ---------- Klavye ve sunum kumandası ---------- */
 document.addEventListener("keydown",e=>{
@@ -746,6 +1283,7 @@ document.addEventListener("keydown",e=>{
  const k=e.key, onBtn=e.target.tagName==="BUTTON"&&(k===" "||k==="Enter");
  if(k==="f"||k==="F"){toggleFS();return}
  const fwd=["ArrowRight","PageDown"," ","Enter"].includes(k), back=k==="ArrowLeft"||k==="PageUp";
+ if(OV){if(k==="Escape"){closeOv();return}if((fwd&&!onBtn)||back){e.preventDefault();const d=back?-1:1;if(OV.kind==="book")rdGo(d);else wbGo(d)}return}
  if(app.querySelector(".done")){if(fwd&&!onBtn){e.preventDefault();const b=document.getElementById("nxu");if(b)b.click()}return}
  if(!L||!app.querySelector(".lesson"))return;
  if(k==="Escape"){openCat(L.ci);return}
